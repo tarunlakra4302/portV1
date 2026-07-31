@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import ProjectDetailModal, { ProjectDetail } from "../components/ProjectDetailModal";
 import SterlingNavigation from "../components/SterlingNavigation";
 import Skiper67 from "../components/Skiper67";
@@ -118,7 +119,7 @@ export default function ThoughtsPage() {
     <main className="w-full min-h-screen bg-white text-black font-sans selection:bg-[#FFDE00] selection:text-black antialiased relative">
       <SterlingNavigation />
 
-      <div className="w-full max-w-[1400px] mx-auto px-6 md:px-12 pt-12 pb-24">
+      <div className="w-full max-w-[1400px] mx-auto px-6 md:px-12 pt-12 pb-24 relative z-50">
 
         {/* Section 2: The Main Content */}
         <div className="grid grid-cols-12 gap-y-8 md:gap-8">
@@ -132,9 +133,26 @@ export default function ThoughtsPage() {
               <BlurReveal as="span" className="block text-[#c2c2c2]" delay={0.1}>
                 Welcome to my personal
               </BlurReveal>
-              <BlurReveal as="span" className="block text-black" delay={0.25}>
-                thoughts — or, as I like to
-              </BlurReveal>
+              <div className="flex flex-wrap items-center gap-x-3 text-black">
+                <BlurReveal as="span" delay={0.25}>
+                  thoughts
+                </BlurReveal>
+                <span className="relative inline-block z-50">
+                  <span className="absolute -top-5 sm:-top-6 md:-top-8 lg:-top-9 left-1/2 -translate-x-1/2 w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 pointer-events-none z-50">
+                    <DotLottieReact
+                      src="https://lottie.host/6755c3e1-9f70-462e-b2d3-31c48ffe8576/Xajq2Qz19F.json"
+                      loop
+                      autoplay
+                    />
+                  </span>
+                  <BlurReveal as="span" delay={0.3}>
+                    —
+                  </BlurReveal>
+                </span>
+                <BlurReveal as="span" delay={0.35}>
+                  or, as I like to
+                </BlurReveal>
+              </div>
               <div className="flex flex-wrap items-center text-[#c2c2c2] gap-x-3">
                 <BlurReveal as="span" delay={0.4}>
                   call it, my

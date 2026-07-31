@@ -1,6 +1,9 @@
+"use client";
+
 import React, { useRef } from 'react'
 import { gsap } from 'gsap'
 import { useGSAP } from '@gsap/react'
+import { usePageNavigate } from '@/lib/view-transition'
 
 interface FooterProps {
   email: string
@@ -8,6 +11,7 @@ interface FooterProps {
   linkedinUrl: string
   githubUrl: string
   resumeUrl: string
+  instagramUrl?: string
   className?: string
 }
 
@@ -17,6 +21,7 @@ export function Footer({
   linkedinUrl,
   githubUrl,
   resumeUrl,
+  instagramUrl,
   className = ""
 }: FooterProps) {
   // Use props or fallback to spec values
@@ -24,6 +29,14 @@ export function Footer({
   const displayLocation = location || "New Delhi, India"
   const displayLinkedIn = linkedinUrl || "https://www.linkedin.com/in/tarun-lakra/"
   const displayGitHub = githubUrl || "https://github.com/tarunlakra4302"
+  const displayInstagram = instagramUrl || "https://www.instagram.com/better_call_tarun?igsh=ZzFhaDI2c3o5OHVl"
+
+  const navigateWithTransition = usePageNavigate()
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault()
+    navigateWithTransition(href, 'rectangle', 'left-right')
+  }
 
   const containerRef = useRef<HTMLSpanElement>(null)
 
@@ -82,22 +95,38 @@ export function Footer({
             <h3 className="text-[#fb923c] text-sm font-bold tracking-wide">Explore</h3>
             <ul className="flex flex-col gap-2.5 text-sm text-[#9ca3af]">
               <li>
-                <a href="/" className="hover:text-white font-bold transition-colors duration-200">
+                <a 
+                  href="/" 
+                  onClick={(e) => handleNavClick(e, '/')}
+                  className="hover:text-white font-bold transition-colors duration-200"
+                >
                   Home
                 </a>
               </li>
               <li>
-                <a href="/projects" className="hover:text-white font-bold transition-colors duration-200">
+                <a 
+                  href="/projects" 
+                  onClick={(e) => handleNavClick(e, '/projects')}
+                  className="hover:text-white font-bold transition-colors duration-200"
+                >
                   Case Studies
                 </a>
               </li>
               <li>
-                <a href="/about" className="hover:text-white font-bold transition-colors duration-200">
+                <a 
+                  href="/about" 
+                  onClick={(e) => handleNavClick(e, '/about')}
+                  className="hover:text-white font-bold transition-colors duration-200"
+                >
                   About Me
                 </a>
               </li>
               <li>
-                <a href="/contact" className="hover:text-white font-bold transition-colors duration-200">
+                <a 
+                  href="/contact" 
+                  onClick={(e) => handleNavClick(e, '/contact')}
+                  className="hover:text-white font-bold transition-colors duration-200"
+                >
                   Contact
                 </a>
               </li>
@@ -137,7 +166,7 @@ export function Footer({
 
               {/* Instagram (left) */}
               <a 
-                href="https://instagram.com" 
+                href={displayInstagram} 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="flex items-center gap-2 hover:text-white font-bold transition-colors duration-200"
@@ -208,6 +237,7 @@ export function Footer({
             {/* Bottom Block: Case Studies - Increased weight to font-bold */}
             <a 
               href="/projects" 
+              onClick={(e) => handleNavClick(e, '/projects')}
               className="group flex items-center justify-between md:justify-end gap-5 w-full max-w-[240px] text-left md:text-right"
             >
               <div className="flex flex-col">
