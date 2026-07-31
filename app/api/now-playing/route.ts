@@ -58,15 +58,10 @@ export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
 export async function GET() {
-  const logFile = path.join(process.cwd(), 'spotify-debug.log');
-  const log = (msg: string) => fs.appendFileSync(logFile, msg + '\n');
-  
   try {
     const tokenResponse = await getAccessToken();
-    log('Token response: ' + JSON.stringify(tokenResponse));
     
     if (!tokenResponse.access_token) {
-      log('Failed to get access token');
       return NextResponse.json({ isPlaying: false, error: 'No access token' });
     }
 
@@ -79,14 +74,11 @@ export async function GET() {
       cache: 'no-store',
     });
 
-    log('Spotify response status: ' + response.status);
-
     if (response.status === 204 || response.status > 400) {
       return NextResponse.json({ isPlaying: false });
     }
 
     const song = await response.json();
-    log('Spotify song data: ' + JSON.stringify(song).substring(0, 200) + '...');
 
     if (song.item === null) {
       return NextResponse.json({ isPlaying: false });
@@ -98,6 +90,8 @@ export async function GET() {
     const album = song.item.album.name;
     const albumImageUrl = song.item.album.images[0].url;
     const songUrl = song.item.external_urls.spotify;
+    const progressMs = song.progress_ms || 0;
+    const durationMs = song.item.duration_ms || 0;
 
     return NextResponse.json({
       album,
@@ -106,9 +100,10 @@ export async function GET() {
       isPlaying,
       songUrl,
       title,
+      progressMs,
+      durationMs,
     });
   } catch (error) {
-    log('Error fetching Spotify now playing: ' + String(error));
     return NextResponse.json(
       { isPlaying: false, message: 'Internal Server Error', error: String(error) },
       { status: 500 }

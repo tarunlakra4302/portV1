@@ -6,6 +6,8 @@ export interface SpotifyData {
   artist?: string;
   albumImageUrl?: string;
   songUrl?: string;
+  progressMs?: number;
+  durationMs?: number;
 }
 
 export function useNowPlaying(intervalMs: number = 10000) {

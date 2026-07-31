@@ -84,6 +84,8 @@ export default function AboutPage() {
                     artist: nowPlaying?.artist,
                     albumImage: nowPlaying?.albumImageUrl,
                     isPlaying: nowPlaying?.isPlaying,
+                    progressMs: nowPlaying?.progressMs,
+                    durationMs: nowPlaying?.durationMs,
                   }}
                 />
               </motion.div>

@@ -117,6 +117,42 @@ const SterlingNavigation = React.forwardRef<
                   </span>
                   &rdquo;
                 </>
+              ) : pathname === "/projects" ? (
+                <>
+                  Focused on crafting products with{" "}
+                  <span
+                    className={`italic transition-all duration-300 ${
+                      isDarkRoute
+                        ? "group-hover:text-white group-hover:font-semibold"
+                        : "group-hover:text-black group-hover:font-semibold"
+                    }`}
+                  >
+                    exceptional performance
+                  </span>{" "}
+                  and{" "}
+                  <span
+                    className={`italic transition-all duration-300 ${
+                      isDarkRoute
+                        ? "group-hover:text-white group-hover:font-semibold"
+                        : "group-hover:text-black group-hover:font-semibold"
+                    }`}
+                  >
+                    polish
+                  </span>
+                  .
+                  <br />
+                  Worst case scenario I&apos;ll make it, best case scenario{" "}
+                  <span
+                    className={`transition-all duration-300 ${
+                      isDarkRoute
+                        ? "group-hover:text-white group-hover:font-semibold group-hover:underline underline-offset-4 decoration-yellow-400 decoration-2"
+                        : "group-hover:text-black group-hover:font-semibold group-hover:underline underline-offset-4 decoration-pink-500 decoration-2"
+                    }`}
+                  >
+                    I&apos;ll make it big
+                  </span>
+                  .
+                </>
               ) : (
                 <>
                   I turn my{" "}
@@ -139,8 +175,9 @@ const SterlingNavigation = React.forwardRef<
                   >
                     improve
                   </span>{" "}
-                  how people work and interact with their lives. Worst case scenario
-                  I&apos;ll make it, best case scenario{" "}
+                  how people work and interact with their lives.
+                  <br />
+                  Worst case scenario I&apos;ll make it, best case scenario{" "}
                   <span
                     className={`transition-all duration-300 ${
                       isDarkRoute

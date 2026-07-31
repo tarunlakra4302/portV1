@@ -142,6 +142,8 @@ export interface MusicPlayerProps {
   artist?: string;
   albumImage?: string;
   isPlaying?: boolean;
+  progressMs?: number;
+  durationMs?: number;
   mode?: 'compact' | 'expanded';
   onToggleExpand?: () => void;
 }
@@ -153,18 +155,29 @@ export const MusicPlayer = ({
   artist, 
   albumImage, 
   isPlaying,
+  progressMs = 0,
+  durationMs = 180000,
   mode = 'compact',
   onToggleExpand
 }: MusicPlayerProps) => {
-  const [elapsed, setElapsed] = useState(25);
+  const totalSeconds = Math.max(1, Math.floor(durationMs / 1000));
+  const initialElapsed = Math.min(totalSeconds, Math.floor(progressMs / 1000));
 
+  const [elapsed, setElapsed] = useState(initialElapsed);
+
+  // Synchronize elapsed time when new progress or song title arrives from Spotify API
+  useEffect(() => {
+    setElapsed(Math.min(totalSeconds, Math.floor((progressMs || 0) / 1000)));
+  }, [progressMs, title, totalSeconds]);
+
+  // Tick local timer forward every second while playing
   useEffect(() => {
     if (!isPlaying) return;
     const interval = setInterval(() => {
-      setElapsed((prev) => (prev < 180 ? prev + 1 : 0));
+      setElapsed((prev) => (prev < totalSeconds ? prev + 1 : totalSeconds));
     }, 1000);
     return () => clearInterval(interval);
-  }, [isPlaying, title]);
+  }, [isPlaying, totalSeconds]);
 
   const formatTime = (secs: number) => {
     const m = Math.floor(secs / 60);
@@ -173,13 +186,13 @@ export const MusicPlayer = ({
   };
 
   const formatRemaining = (secs: number) => {
-    const remaining = 180 - secs;
+    const remaining = Math.max(0, totalSeconds - secs);
     const m = Math.floor(remaining / 60);
     const s = remaining % 60;
     return `-${m}:${s < 10 ? '0' : ''}${s}`;
   };
 
-  const percentage = (elapsed / 180) * 100;
+  const percentage = Math.min(100, (elapsed / totalSeconds) * 100);
 
   if (mode === 'compact') {
     return (
@@ -327,6 +340,8 @@ export interface DynamicIslandProps {
     artist?: string;
     albumImage?: string;
     isPlaying?: boolean;
+    progressMs?: number;
+    durationMs?: number;
   };
   view?: View;
 }
@@ -369,6 +384,8 @@ export default function DynamicIsland({
             artist={musicProps?.artist}
             albumImage={musicProps?.albumImage}
             isPlaying={musicProps?.isPlaying}
+            progressMs={musicProps?.progressMs}
+            durationMs={musicProps?.durationMs}
             mode={isMusicExpanded ? 'expanded' : 'compact'} 
             onToggleExpand={() => setIsMusicExpanded(!isMusicExpanded)}
           />
