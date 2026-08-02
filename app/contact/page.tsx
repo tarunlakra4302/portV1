@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { gsap } from "gsap";
+import { motion } from "framer-motion";
 import { Footer } from "@/components/layout/Footer";
 import SterlingNavigation from "../components/SterlingNavigation";
 
@@ -356,8 +357,11 @@ export default function ContactPage() {
   };
 
   return (
-    <div
+    <motion.div
       ref={containerRef}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.25, ease: "easeOut" }}
       className="min-h-screen bg-[#09090b] text-neutral-100 flex flex-col font-sans selection:bg-neutral-800 selection:text-white relative overflow-x-hidden"
     >
       <SterlingNavigation />
@@ -739,6 +743,6 @@ export default function ContactPage() {
         resumeUrl="https://drive.google.com/file/d/1uCC1Iam4_oSYYWcFfTqVhdws5F_l-222/view"
         className="relative z-10 mt-auto"
       />
-    </div>
+    </motion.div>
   );
 }

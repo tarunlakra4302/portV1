@@ -180,7 +180,7 @@ export const createAnimation = (
           opacity: 1;
         }
         to {
-          opacity: 0.8;
+          opacity: 1;
         }
       }
 
