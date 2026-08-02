@@ -84,7 +84,6 @@ export default function HeroSection3({ showContent = true }: HeroSection3Props) 
                     email="lakra.tarun4302@gmail.com"
                     linkedinUrl="https://www.linkedin.com/in/tarun-lakra/"
                     githubUrl="https://github.com/tarunlakra4302"
-                    twitterUrl="https://x.com"
                   />
                 </section>
               </div>

@@ -127,10 +127,10 @@ export function PersonalDashboard() {
           {/* Header */}
           <div className="mb-3 sm:mb-4">
             <h2 className="text-black text-lg sm:text-xl md:text-2xl font-bold mb-1.5 flex items-center gap-2">
-              Top songs
+              Top Songs
             </h2>
             <p className="text-gray-600 text-[10px] sm:text-xs">
-              my currently playing songs on spotify
+              My currently playing songs on Spotify
             </p>
           </div>
 

@@ -35,6 +35,13 @@ export function Footer({
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault()
+    if (href === "/") {
+      try {
+        sessionStorage.setItem("animateHeroText", "true");
+      } catch (err) {
+        // ignore
+      }
+    }
     navigateWithTransition(href, 'rectangle', 'left-right')
   }
 
@@ -121,15 +128,6 @@ export function Footer({
                   About Me
                 </a>
               </li>
-              <li>
-                <a 
-                  href="/contact" 
-                  onClick={(e) => handleNavClick(e, '/contact')}
-                  className="hover:text-white font-bold transition-colors duration-200"
-                >
-                  Contact
-                </a>
-              </li>
             </ul>
           </div>
 
@@ -207,19 +205,20 @@ export function Footer({
           </div>
 
           {/* Column 4 (Contact) */}
-          <div className="flex flex-col gap-5 md:items-end justify-start">
+          <div className="flex flex-col gap-5 w-full md:items-end justify-start">
             
             {/* Top Block: Contact Me - Increased weight to font-bold */}
             <a 
-              href={`mailto:${displayEmail}`} 
-              className="group flex items-center justify-between md:justify-end gap-5 w-full max-w-[240px] text-left md:text-right"
+              href="/contact" 
+              onClick={(e) => handleNavClick(e, '/contact')}
+              className="group flex items-center justify-between md:justify-end gap-5 w-full md:max-w-[240px] text-left md:text-right"
             >
               <div className="flex flex-col">
                 <span className="text-white text-[15px] font-bold tracking-wide transition-colors duration-200">
                   Contact Me
                 </span>
                 <span className="text-[#6b7280] text-xs font-semibold mt-0.5">
-                  Say Hello !
+                  Say Hello!
                 </span>
               </div>
               {/* Arrow SVG points straight right (→) */}
@@ -232,13 +231,13 @@ export function Footer({
             </a>
             
             {/* Horizontal Line Divider - Made darker/more subtle using bg-white/10 */}
-            <div className="w-full max-w-[240px] h-[1px] bg-white/10" />
+            <div className="w-full md:max-w-[240px] h-[1px] bg-white/10" />
             
             {/* Bottom Block: Case Studies - Increased weight to font-bold */}
             <a 
               href="/projects" 
               onClick={(e) => handleNavClick(e, '/projects')}
-              className="group flex items-center justify-between md:justify-end gap-5 w-full max-w-[240px] text-left md:text-right"
+              className="group flex items-center justify-between md:justify-end gap-5 w-full md:max-w-[240px] text-left md:text-right"
             >
               <div className="flex flex-col">
                 <span className="text-white text-[15px] font-bold tracking-wide transition-colors duration-200">

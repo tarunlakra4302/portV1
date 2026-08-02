@@ -6,7 +6,10 @@ import { gsap } from "gsap";
 import { Footer } from "@/components/layout/Footer";
 import SterlingNavigation from "../components/SterlingNavigation";
 
+import emailjs from "@emailjs/browser";
+
 // Pupil component for yellow and orange characters
+
 interface PupilProps {
   size?: number;
   maxDistance?: number;
@@ -318,15 +321,38 @@ export default function ContactPage() {
     setError("");
     setIsLoading(true);
 
-    // Simulate sending email
-    setTimeout(() => {
-      setIsLoading(false);
+    const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "service_oznli86";
+    const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "template_0qb5xxu";
+    const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "sGWtpIigeRZSZrX63";
+
+    try {
+      await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          name: name,
+          from_name: name,
+          email: email,
+          from_email: email,
+          number: phone || "N/A",
+          phone: phone || "N/A",
+          message: message,
+          time: new Date().toLocaleString(),
+        },
+        publicKey
+      );
+
       setIsSuccess(true);
       setName("");
       setEmail("");
       setPhone("");
       setMessage("");
-    }, 2000);
+    } catch (err: any) {
+      console.error("EmailJS Error:", err);
+      setError(err?.text || err?.message || "Failed to send message. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -540,7 +566,7 @@ export default function ContactPage() {
                 <div className="space-y-2 max-w-sm">
                   <h3 className="text-xl font-normal text-white">Message Dispatched</h3>
                   <p className="text-xs text-neutral-400 font-light leading-relaxed">
-                    Thank you {name || "there"}! Your message has been sent successfully. We will get back to you soon.
+                    Thank you {name || "there"}! Your message has been sent successfully. I will get back to you soon.
                   </p>
                 </div>
                 <button
@@ -568,6 +594,7 @@ export default function ContactPage() {
               </label>
               <input
                 id="name"
+                name="name"
                 type="text"
                 required
                 placeholder="John Doe"
@@ -587,6 +614,7 @@ export default function ContactPage() {
               </label>
               <input
                 id="email"
+                name="email"
                 type="email"
                 required
                 placeholder="john@example.com"
@@ -606,6 +634,7 @@ export default function ContactPage() {
               </label>
               <input
                 id="phone"
+                name="number"
                 type="tel"
                 placeholder="+1 (555) 000-0000"
                 value={phone}
@@ -624,6 +653,7 @@ export default function ContactPage() {
               </label>
               <textarea
                 id="message"
+                name="message"
                 required
                 rows={4}
                 placeholder="Tell me about your project..."
@@ -650,17 +680,16 @@ export default function ContactPage() {
                 loop
                 muted
                 playsInline
-                className="absolute inset-0 w-full h-full object-cover transition-opacity duration-300 pointer-events-none"
+                className="absolute inset-0 w-full h-full object-cover min-w-full min-h-full transition-opacity duration-300 pointer-events-none"
                 style={{
                   opacity: isButtonHovered ? 1 : 0,
                   filter: 'brightness(1.5)',
-                  transform: 'translateY(-20px)'
                 }}
               />
 
               {/* Dark Overlay */}
               <div
-                className="absolute inset-0 bg-black/50 transition-opacity duration-300 pointer-events-none"
+                className="absolute inset-0 w-full h-full bg-black/50 transition-opacity duration-300 pointer-events-none"
                 style={{ opacity: isButtonHovered ? 1 : 0 }}
               />
 

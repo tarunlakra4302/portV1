@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { usePageNavigate } from "@/lib/view-transition";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 const SterlingNavigation = React.forwardRef<
   HTMLDivElement,
@@ -34,13 +35,20 @@ const SterlingNavigation = React.forwardRef<
     href: string
   ) => {
     e.preventDefault();
+    if (href === "/") {
+      try {
+        sessionStorage.setItem("animateHeroText", "true");
+      } catch (err) {
+        // ignore
+      }
+    }
     navigateWithTransition(href, "rectangle", "left-right");
   };
 
   const navItems = [
     { label: "Home", href: "/" },
     { label: "About", href: "/about" },
-    { label: "Work", href: "/projects" },
+    { label: "Craft", href: "/projects" },
     { label: "Thoughts", href: "/thoughts" },
     { label: "Contact", href: "/contact" },
   ];
@@ -67,12 +75,12 @@ const SterlingNavigation = React.forwardRef<
           : "bg-white text-black border-gray-100"
       }`}
     >
-      <div className="w-full max-w-[1400px] mx-auto px-6 md:px-12 py-4">
+      <div className="w-full max-w-[1400px] mx-auto px-6 md:px-12 py-4 relative">
         {/* Top Row: Brand + Local Time on Left, Bio Statement on Right (hidden on homepage & about page) */}
         {!hideTopHeader && (
           <div
-            className={`flex flex-col md:flex-row md:items-start justify-between gap-6 pb-6 border-b mb-4 ${
-              isDarkRoute ? "border-neutral-800/60" : "border-gray-100/60"
+            className={`flex flex-col md:flex-row md:items-start justify-between gap-6 pb-6 mb-4 ${
+              isDarkRoute ? "" : "border-b border-gray-100/60"
             }`}
           >
             {/* Left: Brand Name & Local Time */}
@@ -105,7 +113,7 @@ const SterlingNavigation = React.forwardRef<
             >
               {pathname === "/thoughts" ? (
                 <>
-                  If you ask the grass, the zebra is the monster, and the lion is the protector. Who is the Villain is dependent on &ldquo;
+                  If you ask the grass, the zebra is the monster, and the lion is the protector. Who is the villain depends on &ldquo;
                   <span
                     className={`transition-all duration-300 ${
                       isDarkRoute
@@ -113,9 +121,9 @@ const SterlingNavigation = React.forwardRef<
                         : "group-hover:text-black group-hover:font-semibold group-hover:underline underline-offset-4 decoration-pink-500 decoration-2"
                     }`}
                   >
-                    Who is telling the story
+                    who is telling the story
                   </span>
-                  &rdquo;
+                  &rdquo;.
                 </>
               ) : pathname === "/projects" ? (
                 <>
@@ -141,7 +149,7 @@ const SterlingNavigation = React.forwardRef<
                   </span>
                   .
                   <br />
-                  Worst case scenario I&apos;ll make it, best case scenario{" "}
+                  Worst-case scenario, I&apos;ll make it; best-case scenario,{" "}
                   <span
                     className={`transition-all duration-300 ${
                       isDarkRoute
@@ -153,31 +161,9 @@ const SterlingNavigation = React.forwardRef<
                   </span>
                   .
                 </>
-              ) : (
+              ) : pathname === "/contact" ? (
                 <>
-                  I turn my{" "}
-                  <span
-                    className={`transition-all duration-300 ${
-                      isDarkRoute
-                        ? "group-hover:text-white group-hover:font-semibold"
-                        : "group-hover:text-black group-hover:font-semibold"
-                    }`}
-                  >
-                    frustrations and passions
-                  </span>{" "}
-                  into products that{" "}
-                  <span
-                    className={`transition-all duration-300 ${
-                      isDarkRoute
-                        ? "group-hover:text-white group-hover:font-semibold"
-                        : "group-hover:text-black group-hover:font-semibold"
-                    }`}
-                  >
-                    improve
-                  </span>{" "}
-                  how people work and interact with their lives.
-                  <br />
-                  Worst case scenario I&apos;ll make it, best case scenario{" "}
+                  My toxic trait is that I want to{" "}
                   <span
                     className={`transition-all duration-300 ${
                       isDarkRoute
@@ -185,41 +171,97 @@ const SterlingNavigation = React.forwardRef<
                         : "group-hover:text-black group-hover:font-semibold group-hover:underline underline-offset-4 decoration-pink-500 decoration-2"
                     }`}
                   >
-                    I&apos;ll make it big
-                  </span>
-                  .
+                    create everything
+                  </span>{" "}
+                  all at once.
+                </>
+              ) : (
+                <>
+                  My toxic trait is that I want to{" "}
+                  <span
+                    className={`transition-all duration-300 ${
+                      isDarkRoute
+                        ? "group-hover:text-white group-hover:font-semibold group-hover:underline underline-offset-4 decoration-yellow-400 decoration-2"
+                        : "group-hover:text-black group-hover:font-semibold group-hover:underline underline-offset-4 decoration-pink-500 decoration-2"
+                    }`}
+                  >
+                    create everything
+                  </span>{" "}
+                  all at once.
                 </>
               )}
             </div>
           </div>
         )}
 
-        {/* Bottom Row: Navigation Links */}
-        <div className="flex items-center gap-6 pt-2 text-sm font-medium tracking-wide">
-          {navItems.map((item) => {
-            const isActive =
-              item.href === "/"
-                ? pathname === "/"
-                : pathname?.startsWith(item.href);
-            return (
-              <Link
-                key={item.label}
-                href={item.href}
-                onClick={(e) => handleNavClick(e, item.href)}
-                className={`transition-colors duration-200 ${
-                  isActive
-                    ? isDarkRoute
-                      ? "text-white font-bold border-b-2 border-white pb-0.5"
-                      : "text-black font-bold border-b-2 border-black pb-0.5"
-                    : isDarkRoute
-                    ? "text-neutral-400 hover:text-white"
-                    : "text-[#c2c2c2] hover:text-black"
-                }`}
-              >
-                {item.label}
-              </Link>
-            );
-          })}
+        {/* Bottom Row: Navigation Links & Lottie Animation */}
+        <div className="flex items-center justify-between pt-2">
+          <div className="flex items-center gap-6 text-sm font-medium tracking-wide">
+            {navItems.map((item) => {
+              const isActive =
+                item.href === "/"
+                  ? pathname === "/"
+                  : pathname?.startsWith(item.href);
+              return (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  onClick={(e) => handleNavClick(e, item.href)}
+                  className={`transition-colors duration-200 ${
+                    isActive
+                      ? isDarkRoute
+                        ? "text-white font-bold border-b-2 border-white pb-0.5"
+                        : "text-black font-bold border-b-2 border-black pb-0.5"
+                      : isDarkRoute
+                      ? "text-neutral-400 hover:text-white"
+                      : "text-[#c2c2c2] hover:text-black"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
+          </div>
+
+          {pathname?.startsWith("/about") && (
+            <div className="absolute right-6 md:right-12 -bottom-4 translate-y-1 w-24 h-24 md:w-28 md:h-28 flex items-center justify-center shrink-0 pointer-events-none">
+              <DotLottieReact
+                src="https://lottie.host/7400cdfb-986c-4f87-9b5d-d7f90c7a0f4f/6P3YDZEwXf.json"
+                loop
+                autoplay
+              />
+            </div>
+          )}
+
+          {pathname?.startsWith("/projects") && (
+            <div className="absolute right-6 md:right-12 -bottom-4 translate-y-1 w-24 h-24 md:w-28 md:h-28 flex items-center justify-center shrink-0 pointer-events-none">
+              <DotLottieReact
+                src="https://lottie.host/3d6470da-e1df-43ea-b8c5-d7954c1a497f/nCFmfwv2hN.json"
+                loop
+                autoplay
+              />
+            </div>
+          )}
+
+          {pathname?.startsWith("/thoughts") && (
+            <div className="absolute right-6 md:right-12 -bottom-4 translate-y-1 w-24 h-24 md:w-28 md:h-28 flex items-center justify-center shrink-0 pointer-events-none">
+              <DotLottieReact
+                src="https://lottie.host/182b5d6e-3649-46c4-97ef-dc09b6dfc7af/f5NiPLU9vp.json"
+                loop
+                autoplay
+              />
+            </div>
+          )}
+
+          {pathname?.startsWith("/contact") && (
+            <div className="absolute right-6 md:right-12 -bottom-4 translate-y-1 w-24 h-24 md:w-28 md:h-28 flex items-center justify-center shrink-0 pointer-events-none">
+              <DotLottieReact
+                src="https://lottie.host/b92851da-ead9-408d-9602-f688fa1234ec/66tklHI50M.json"
+                loop
+                autoplay
+              />
+            </div>
+          )}
         </div>
       </div>
     </header>

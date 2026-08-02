@@ -41,45 +41,50 @@ export default function Preloader({ onComplete }: PreloaderProps) {
   }, [])
 
   useEffect(() => {
-    // Count up from 0 to 100 in ~2500ms
-    const totalDuration = 2500;
-    const intervalTime = 25;
-    const steps = totalDuration / intervalTime;
-    const stepIncrement = 100 / steps;
+    const TOTAL_DURATION = 2600; // total duration to reach 100% and last word
+    const INITIAL_WORD_PAUSE = 600; // initial greeting pause
+    const numWords = words.length; // 12
+    const remainingTime = TOTAL_DURATION - INITIAL_WORD_PAUSE;
+    const wordStep = remainingTime / (numWords - 1); // ~181.8ms per word
+
+    const startTime = Date.now();
 
     const timer = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(timer);
-          return 100;
-        }
-        return Math.min(100, Math.round(prev + stepIncrement));
-      });
-    }, intervalTime);
+      const elapsed = Date.now() - startTime;
+      
+      // Calculate progress (0 to 100)
+      const currentProgress = Math.min(100, Math.round((elapsed / TOTAL_DURATION) * 100));
+      setProgress(currentProgress);
+
+      // Calculate word index (0 to numWords - 1)
+      if (elapsed < INITIAL_WORD_PAUSE) {
+        setIndex(0);
+      } else {
+        const currentWordIndex = Math.min(
+          numWords - 1,
+          1 + Math.floor((elapsed - INITIAL_WORD_PAUSE) / wordStep)
+        );
+        setIndex(currentWordIndex);
+      }
+
+      // Both reach completion at the exact same moment
+      if (elapsed >= TOTAL_DURATION) {
+        clearInterval(timer);
+        setProgress(100);
+        setIndex(numWords - 1);
+
+        // Hold together showing 100% and last word, then slide up exit
+        setTimeout(() => {
+          setIsExiting(true);
+          setTimeout(() => {
+            onComplete?.();
+          }, 800);
+        }, 500);
+      }
+    }, 16);
 
     return () => clearInterval(timer);
-  }, []);
-
-  useEffect(() => {
-    if (index === words.length - 1) {
-      // Start exit animation after showing the last word
-      setTimeout(() => {
-        setIsExiting(true)
-        // Call onComplete after exit animation
-        setTimeout(() => {
-          onComplete?.()
-        }, 1000)
-      }, 1000)
-      return
-    }
-
-    setTimeout(
-      () => {
-        setIndex(index + 1)
-      },
-      index === 0 ? 1000 : 150,
-    )
-  }, [index, onComplete])
+  }, [onComplete]);
 
   return (
     <motion.div
