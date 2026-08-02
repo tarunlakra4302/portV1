@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -9,18 +10,19 @@ import SterlingNavigation from "../components/SterlingNavigation";
 import { Footer } from "@/components/layout/Footer";
 import BlurReveal from "@/components/ui/blur-reveal";
 import { SpiderVerseGlitchButton } from "@/components/ui/spider-verse-glitch-button";
-import ParetoChart from "@/components/ui/ParetoChart";
-import WaterfallEditorial from "@/components/ui/WaterfallEditorial";
-import LossAversionChart from "@/components/ui/LossAversionChart";
-import LossWaterfallEditorial from "@/components/ui/LossWaterfallEditorial";
-import VennDiagramChart from "@/components/ui/VennDiagramChart";
-import VennWaterfallEditorial from "@/components/ui/VennWaterfallEditorial";
-import ObserverEffectChart from "@/components/ui/ObserverEffectChart";
-import ObserverWaterfallEditorial from "@/components/ui/ObserverWaterfallEditorial";
-import TrustGameChart from "@/components/ui/TrustGameChart";
-import TrustWaterfallEditorial from "@/components/ui/TrustWaterfallEditorial";
-import DotParticleCanvas from "@/components/ui/dot-particles";
-import EntropyWaterfallEditorial from "@/components/ui/EntropyWaterfallEditorial";
+
+const ParetoChart = dynamic(() => import("@/components/ui/ParetoChart"), { ssr: false });
+const WaterfallEditorial = dynamic(() => import("@/components/ui/WaterfallEditorial"), { ssr: false });
+const LossAversionChart = dynamic(() => import("@/components/ui/LossAversionChart"), { ssr: false });
+const LossWaterfallEditorial = dynamic(() => import("@/components/ui/LossWaterfallEditorial"), { ssr: false });
+const VennDiagramChart = dynamic(() => import("@/components/ui/VennDiagramChart"), { ssr: false });
+const VennWaterfallEditorial = dynamic(() => import("@/components/ui/VennWaterfallEditorial"), { ssr: false });
+const ObserverEffectChart = dynamic(() => import("@/components/ui/ObserverEffectChart"), { ssr: false });
+const ObserverWaterfallEditorial = dynamic(() => import("@/components/ui/ObserverWaterfallEditorial"), { ssr: false });
+const TrustGameChart = dynamic(() => import("@/components/ui/TrustGameChart"), { ssr: false });
+const TrustWaterfallEditorial = dynamic(() => import("@/components/ui/TrustWaterfallEditorial"), { ssr: false });
+const DotParticleCanvas = dynamic(() => import("@/components/ui/dot-particles"), { ssr: false });
+const EntropyWaterfallEditorial = dynamic(() => import("@/components/ui/EntropyWaterfallEditorial"), { ssr: false });
 
 interface ArticleBlock {
   heading?: string;
@@ -218,12 +220,7 @@ export default function ThoughtsPage() {
   }, [selectedThought]);
 
   return (
-    <motion.main 
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.25, ease: "easeOut" }}
-      className="w-full min-h-screen bg-white text-black font-sans selection:bg-[#FFDE00] selection:text-black antialiased relative"
-    >
+    <main className="w-full min-h-screen bg-white text-black font-sans selection:bg-[#FFDE00] selection:text-black antialiased relative">
       <SterlingNavigation />
 
       <div className="w-full max-w-[1400px] mx-auto px-6 md:px-12 pt-12 pb-24 relative z-50">
@@ -447,80 +444,29 @@ export default function ThoughtsPage() {
                   {/* Thoughts List Section */}
                   <div className="mt-16 md:mt-24 flex flex-col divide-y divide-gray-200/80 border-t border-b border-gray-200/80">
                     {THOUGHTS.map((thought, index) => {
-                      if (hasOpenedArticle) {
-                        return (
-                          <div
-                            key={thought.id}
-                            onClick={() => handleSelectThought(thought)}
-                            className="group py-6 md:py-7 cursor-pointer transition-colors duration-200"
-                          >
-                            <div className="flex items-center justify-between gap-3 sm:gap-4">
-                              <h3 className="text-lg sm:text-[19px] md:text-xl font-bold text-[#111111] shrink-0 tracking-tight">
-                                {thought.name}
-                              </h3>
-                              <div className="flex-1 h-[1px] bg-[#d9267c] min-w-[20px]" />
-                              <span className="text-xs sm:text-sm text-gray-500 font-normal shrink-0 whitespace-nowrap block">
-                                {thought.date}
-                              </span>
-                            </div>
-                            {thought.description && (
-                              <div className="mt-2.5">
-                                <p className="text-sm sm:text-[15px] text-gray-500 font-normal leading-relaxed">
-                                  {thought.description}
-                                </p>
-                              </div>
-                            )}
-                          </div>
-                        );
-                      }
-
-                      const itemBaseDelay = 0.15 + index * 0.03;
                       return (
                         <motion.div
                           key={thought.id}
                           onClick={() => handleSelectThought(thought)}
                           initial={{ opacity: 0, y: 10 }}
                           animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: itemBaseDelay, duration: 0.3, ease: "easeOut" }}
+                          transition={{ delay: index * 0.04, duration: 0.25, ease: "easeOut" }}
                           className="group py-6 md:py-7 cursor-pointer transition-colors duration-200"
                         >
                           <div className="flex items-center justify-between gap-3 sm:gap-4">
-                            <BlurReveal
-                              as="h3"
-                              className="text-lg sm:text-[19px] md:text-xl font-bold text-[#111111] shrink-0 tracking-tight"
-                              delay={itemBaseDelay}
-                              speedReveal={3}
-                              speedSegment={1}
-                            >
+                            <h3 className="text-lg sm:text-[19px] md:text-xl font-bold text-[#111111] shrink-0 tracking-tight group-hover:text-[#d9267c] transition-colors duration-200">
                               {thought.name}
-                            </BlurReveal>
-                            <motion.div
-                              initial={{ scaleX: 0 }}
-                              animate={{ scaleX: 1 }}
-                              transition={{ delay: itemBaseDelay + 0.03, duration: 0.3, ease: "easeOut" }}
-                              className="flex-1 h-[1px] bg-[#d9267c] min-w-[20px] origin-left"
-                            />
-                            <BlurReveal
-                              as="span"
-                              className="text-xs sm:text-sm text-gray-500 font-normal shrink-0 whitespace-nowrap block"
-                              delay={itemBaseDelay + 0.03}
-                              speedReveal={3}
-                              speedSegment={1}
-                            >
+                            </h3>
+                            <div className="flex-1 h-[1px] bg-[#d9267c] min-w-[20px]" />
+                            <span className="text-xs sm:text-sm text-gray-500 font-normal shrink-0 whitespace-nowrap block">
                               {thought.date}
-                            </BlurReveal>
+                            </span>
                           </div>
                           {thought.description && (
                             <div className="mt-2.5">
-                              <BlurReveal
-                                as="p"
-                                className="text-sm sm:text-[15px] text-gray-500 font-normal leading-relaxed"
-                                delay={itemBaseDelay + 0.06}
-                                speedReveal={3.5}
-                                speedSegment={1.2}
-                              >
+                              <p className="text-sm sm:text-[15px] text-gray-500 font-normal leading-relaxed">
                                 {thought.description}
-                              </BlurReveal>
+                              </p>
                             </div>
                           )}
                         </motion.div>
@@ -542,7 +488,7 @@ export default function ThoughtsPage() {
         resumeUrl="https://drive.google.com/file/d/1uCC1Iam4_oSYYWcFfTqVhdws5F_l-222/view"
         className="relative z-10 bg-white border-t border-zinc-100 text-black py-16"
       />
-    </motion.main>
+    </main>
   );
 }
 
