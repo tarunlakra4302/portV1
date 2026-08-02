@@ -195,8 +195,8 @@ const SterlingNavigation = React.forwardRef<
         )}
 
         {/* Bottom Row: Navigation Links & Lottie Animation */}
-        <div className="flex items-center justify-between pt-2">
-          <div className="flex items-center gap-6 text-sm font-medium tracking-wide">
+        <div className="flex items-center justify-between pt-2 overflow-x-auto no-scrollbar">
+          <div className="flex items-center gap-3.5 sm:gap-6 text-xs sm:text-sm font-medium tracking-wide whitespace-nowrap">
             {navItems.map((item) => {
               const isActive =
                 item.href === "/"

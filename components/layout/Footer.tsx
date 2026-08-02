@@ -306,7 +306,7 @@ export function Footer({
         >
           <span 
             ref={containerRef} 
-            className="font-space-grotesk font-black text-[#fdfce9] inline-flex items-center justify-center leading-[0.7] tracking-tighter text-[8.5vw] sm:text-[9.2vw] md:text-[9.8vw] lg:text-[10vw] xl:text-[10.2vw] whitespace-nowrap lowercase"
+            className="font-space-grotesk font-black text-[#fdfce9] inline-flex items-center justify-center leading-[0.7] tracking-tighter text-[7.2vw] sm:text-[9.2vw] md:text-[9.8vw] lg:text-[10vw] xl:text-[10.2vw] whitespace-nowrap lowercase"
           >
             <span>damn</span>
             <span className="hidden-char overflow-hidden opacity-0 inline-block">&nbsp;</span>

@@ -142,7 +142,7 @@ export const ModernHero: React.FC<ModernHeroProps> = ({
       className={`w-full max-w-4xl text-left font-serif text-[#111111] bg-white py-16 md:py-24 ${className}`}
     >
       {/* 2. Main Headline */}
-      <h1 className="text-left text-3xl sm:text-4xl md:text-[40px] font-normal leading-[1.2] text-[#111111] max-w-3xl break-words w-full">
+      <h1 className="text-left text-2xl sm:text-4xl md:text-[40px] font-normal leading-[1.25] sm:leading-[1.2] text-[#111111] max-w-3xl break-words w-full">
         <motion.span variants={wordVariants} className="inline">
           I turn my frustrations and passions into{" "}
         </motion.span>
