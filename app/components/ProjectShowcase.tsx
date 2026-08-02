@@ -15,20 +15,36 @@ interface ProjectData extends ProjectDetail {
  
 const PROJECTS: ProjectData[] = [
   {
+    id: 4,
+    name: "Sustainable Sundays",
+    subtitle: "Community Impact & Donation Platform",
+    heroImage: "/project/sustainable_sundays.png",
+    paragraphs: [
+      "Sustainable Sundays is a full-stack web platform built for a Bangalore-based environmental initiative to manage zero-waste community programs, volunteer signups, and automated payment gateway donations.",
+      "Engineered with a Next.js App Router architecture featuring Razorpay payment integration, Upstash Redis distributed rate limiting, and strict UUID v4 idempotency validation.",
+      "The platform eliminates payment duplicate risk, secures public forms against automated spam, and delivers a responsive 60fps WebGL-enhanced user interface."
+    ],
+    liveUrl: "https://github.com/tarunlakra4302",
+    category: "Community Impact & Climate Tech",
+    description: "Community impact & donation platform managing zero-waste programs and automated payments.",
+    metric: "0% Duplicate Risk",
+    status: "Active"
+  },
+  {
     id: 1,
     name: "Whispering Pages",
-    subtitle: "Billion Dollar SaaS",
+    subtitle: "Conversational Voice AI Document Reader",
     heroImage: "/project/whispering pages .png",
     paragraphs: [
-      "Whispering Pages is a highly optimized, state-of-the-art open-source project management platform designed for scale. By utilizing modern web protocols and local-first architecture, it achieves near-zero latency state updates across distributed engineering teams globally.",
-      "The engine features high-frequency state synchronization powered by delta-compression algorithms, allowing real-time collaborative whiteboarding, interactive Kanban streams, and dynamic task scheduling without database bottlenecks.",
-      "Engineered with a focus on developer experience, it provides standard inline instrumentation, a clean, extensible CLI, and custom integration adapters for all modern CI/CD pipelines, making it a robust foundation for building high-performing software organizations."
+      "Whispering Pages is a conversational voice AI platform designed to transform static text documents into interactive, voice-driven experiences. By leveraging real-time WebRTC audio streaming, it allows users to ingest complex document text and engage in natural, two-way vocal Q&A with dynamic voice personas.",
+      "The system delegates speech-to-speech routing to Vapi's edge engine paired with ElevenLabs TTS, maintaining stateful document context markers on MongoDB to eliminate processing bottlenecks and achieve sub-700ms voice response latency.",
+      "Engineered with a focus on accessibility and rapid comprehension, Whispering Pages features real-time transcript synchronization, multi-provider fallback pipelines for continuous session uptime, and strict end-to-end type safety with Next.js 16 and TypeScript."
     ],
     liveUrl: "https://whispering-pages-kzpk.vercel.app/",
     codeUrl: "https://github.com/tarunlakra4302/Whispering-Pages",
-    category: "Real-time Synchronization",
-    description: "High-frequency state synchronization engine for multi-agent environments.",
-    metric: "4.2ms latency",
+    category: "Conversational Voice AI",
+    description: "Real-time voice AI platform for interactive document Q&A and hands-free summarization.",
+    metric: "< 700ms latency",
     status: "Active"
   },
   {
@@ -64,50 +80,38 @@ const PROJECTS: ProjectData[] = [
     description: "Visual reporting pipeline for deep user interaction and performance tracking.",
     metric: "140M events/sec",
     status: "Processing"
-  },
-  {
-    id: 4,
-    name: "TaskFlow Sonet",
-    subtitle: "Low-level Hardware Interface",
-    heroImage: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1200&auto=format&fit=crop",
-    paragraphs: [
-      "TaskFlow Sonet is a low-latency communications framework designed specifically for interfacing with custom edge devices, external displays, and matrix controllers directly over USB and web serial connections.",
-      "With high-throughput serialization buffers, TaskFlow Sonet easily streams high-resolution data channels (up to 12Gbps) to peripheral arrays, supporting custom refresh rates and visual feedback systems.",
-      "Ideal for industrial instrumentation and high-fidelity simulated environments, the framework includes comprehensive hardware-in-the-loop testing suites and custom device drivers out of the box."
-    ],
-    liveUrl: "https://github.com",
-    codeUrl: "https://github.com",
-    category: "Hardware Interface",
-    description: "Low-level protocol framework for edge devices and external displays.",
-    metric: "12Gbps throughput",
-    status: "Connected"
-  },
-  {
-    id: 5,
-    name: "CloudVibe Design",
-    subtitle: "Premium Design Vocabulary",
-    heroImage: "https://images.unsplash.com/photo-1600132806370-bf17e65e942f?q=80&w=1200&auto=format&fit=crop",
-    paragraphs: [
-      "CloudVibe is a premium design language and comprehensive UI component library, strictly optimized for speed, responsive design, and visual excellence across devices.",
-      "CloudVibe offers curated color palettes, elegant typography pairings, fluid layouts, and built-in interactive micro-animations that turn standard web interactions into satisfying sensory experiences.",
-      "Developers can build consistent, beautiful, and accessible web application frontends in minutes using CloudVibe's pre-configured theme tokens and highly flexible modular elements."
-    ],
-    liveUrl: "https://github.com",
-    codeUrl: "https://github.com",
-    category: "UI Components",
-    description: "Premium visual language and component library for state-of-the-art apps.",
-    metric: "v2.4.0 release",
-    status: "Stable"
   }
 ];
  
 export default function ProjectShowcase() {
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [viewMode, setViewMode] = useState<"list" | "detail">("list");
+  const [isSmallScreen, setIsSmallScreen] = useState<boolean>(false);
   const scrollPosRef = React.useRef<number>(0);
  
   const activeProject = PROJECTS[activeIndex];
  
+  // Screen size listener for mobile slideshow
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsSmallScreen(window.innerWidth <= 768);
+    };
+    checkScreenSize();
+    window.addEventListener("resize", checkScreenSize);
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
+
+  // Automatic slideshow on small screens
+  useEffect(() => {
+    if (!isSmallScreen || viewMode !== "list") return;
+
+    const interval = setInterval(() => {
+      setActiveIndex((prevIndex) => (prevIndex + 1) % PROJECTS.length);
+    }, 3500);
+
+    return () => clearInterval(interval);
+  }, [isSmallScreen, viewMode]);
+
   const handleSelectProject = (index: number) => {
     scrollPosRef.current = window.scrollY;
     setActiveIndex(index);
@@ -234,26 +238,28 @@ export default function ProjectShowcase() {
                     </motion.span>
                   </motion.a>
  
-                  <motion.a
-                    href={activeProject.codeUrl || "#"}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-secondary"
-                    whileHover="hover"
-                    whileTap={{ scale: 0.96 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 15 }}
-                  >
-                    <span>See Source Code</span>
-                    <motion.span
-                      variants={{
-                        hover: { rotate: 8 }
-                      }}
-                      transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                      className="inline-flex"
+                  {activeProject.codeUrl && (
+                    <motion.a
+                      href={activeProject.codeUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-secondary"
+                      whileHover="hover"
+                      whileTap={{ scale: 0.96 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 15 }}
                     >
-                      <BookOpen className="w-4 h-4" />
-                    </motion.span>
-                  </motion.a>
+                      <span>See Source Code</span>
+                      <motion.span
+                        variants={{
+                          hover: { rotate: 8 }
+                        }}
+                        transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                        className="inline-flex"
+                      >
+                        <BookOpen className="w-4 h-4" />
+                      </motion.span>
+                    </motion.a>
+                  )}
                 </motion.div>
               </div>
             </div>
@@ -274,10 +280,17 @@ export default function ProjectShowcase() {
             >
               <div className="preview-card">
                 {/* Project Image Background */}
-                <div 
-                  className="card-bg-image" 
-                  style={{ backgroundImage: `url("${encodeURI(activeProject.heroImage)}")` }}
-                />
+                <AnimatePresence>
+                  <motion.div 
+                    key={activeProject.id}
+                    initial={{ opacity: 0, scale: 0.98, filter: "blur(4px)" }}
+                    animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+                    exit={{ opacity: 0, scale: 1.02 }}
+                    transition={{ duration: 0.55, ease: [0.25, 1, 0.5, 1] }}
+                    className={`card-bg-image ${activeProject.name === "Sustainable Sundays" ? "card-bg-image--inset" : ""}`} 
+                    style={{ backgroundImage: `url("${encodeURI(activeProject.heroImage)}")` }}
+                  />
+                </AnimatePresence>
               </div>
             </div>
  
@@ -301,7 +314,15 @@ export default function ProjectShowcase() {
                       >
                         <span className="project-name">
                           {project.name}
-                          {isActive && <span className="active-indicator"> ·</span>}
+                          {isActive && (
+                            <motion.span
+                              layoutId="active-indicator-dot"
+                              transition={{ type: "spring", stiffness: 380, damping: 26 }}
+                              className="active-indicator"
+                            >
+                              {" "}·
+                            </motion.span>
+                          )}
                         </span>
                       </motion.button>
                     </li>

@@ -9,6 +9,18 @@ import SterlingNavigation from "../components/SterlingNavigation";
 import { Footer } from "@/components/layout/Footer";
 import BlurReveal from "@/components/ui/blur-reveal";
 import { SpiderVerseGlitchButton } from "@/components/ui/spider-verse-glitch-button";
+import ParetoChart from "@/components/ui/ParetoChart";
+import WaterfallEditorial from "@/components/ui/WaterfallEditorial";
+import LossAversionChart from "@/components/ui/LossAversionChart";
+import LossWaterfallEditorial from "@/components/ui/LossWaterfallEditorial";
+import VennDiagramChart from "@/components/ui/VennDiagramChart";
+import VennWaterfallEditorial from "@/components/ui/VennWaterfallEditorial";
+import ObserverEffectChart from "@/components/ui/ObserverEffectChart";
+import ObserverWaterfallEditorial from "@/components/ui/ObserverWaterfallEditorial";
+import TrustGameChart from "@/components/ui/TrustGameChart";
+import TrustWaterfallEditorial from "@/components/ui/TrustWaterfallEditorial";
+import DotParticleCanvas from "@/components/ui/dot-particles";
+import EntropyWaterfallEditorial from "@/components/ui/EntropyWaterfallEditorial";
 
 interface ArticleBlock {
   heading?: string;
@@ -17,6 +29,7 @@ interface ArticleBlock {
     caption?: string;
     codeHtml: string;
   }[];
+  customComponent?: string;
 }
 
 interface ThoughtData {
@@ -35,171 +48,147 @@ interface ThoughtData {
 const THOUGHTS: ThoughtData[] = [
   {
     id: 1,
-    name: "React Under the Hood",
-    subtitle: "February 28, 2026 • React Architecture",
+    name: "we expect world to share evenly",
+    subtitle: "React Architecture",
     category: "React",
-    description: "A deep dive into how React actually works behind the scenes, from JSX to the Virtual DOM, reconciliation, and the Fiber architecture.",
-    metric: "8 min read",
+    description: "value is not shared evenly; it pools. a vital few carry almost everything, and the rest is a long, fiat, forgotten tail. the whole craft is choosing which few to become.",
+    metric: "1 min read",
     status: "Published",
-    date: "February 28, 2026",
+    date: "",
     year: "2026",
     content: [
       {
-        heading: "Introduction",
         paragraphs: [
-          "If you're like me, you've probably been writing React for a while now, building components, managing state, passing props around, without really thinking about what's going on behind the curtain. And honestly, you don't *have* to know. React's API is nice enough that you can be productive without understanding its guts.",
-          "But once you peek under the hood? It makes a lot of things click. Performance issues start making sense. Those weird \"rules of hooks\" finally have a reason. And honestly, it's just cool to see how it all works.",
-          "So let's dig in."
+          "value is not shared evenly; it pools. a vital few carry almost everything, and the rest is a long, fiat, forgotten tail. the whole craft is choosing which few to become."
         ]
       },
       {
-        heading: "JSX is Just Syntactic Sugar",
-        paragraphs: [
-          "First things first. JSX is not HTML. I know it looks like it, but it's really just syntactic sugar for function calls.",
-          "When you write this:"
-        ],
-        codeBlocks: [
-          {
-            codeHtml: `<span className="text-[#e5c07b]">const</span> <span className="text-[#e06c75]">element</span> <span className="text-[#56b6c2]">=</span> <span className="text-[#e06c75]">&lt;h1</span> <span className="text-[#d19a66]">className</span><span className="text-[#56b6c2]">=</span><span className="text-[#98c379]">"greeting"</span>&gt;<span className="text-white">Hello, world!</span>&lt;/h1&gt;<span className="text-gray-400">;</span>`
-          }
-        ]
+        customComponent: "paretoChart"
       },
       {
-        paragraphs: [
-          "Your compiler (SWC, OXC, Babel, whatever you're using) turns it into this:"
-        ],
-        codeBlocks: [
-          {
-            codeHtml: `<span className="text-[#e5c07b]">const</span> <span className="text-[#e06c75]">element</span> <span className="text-[#56b6c2]">=</span> <span className="text-[#61afef]">React</span>.<span className="text-[#56b6c2]">createElement</span>(<span className="text-[#98c379]">'h1'</span>, { <span className="text-[#e06c75]">className</span><span className="text-[#56b6c2]">:</span> <span className="text-[#98c379]">'greeting'</span> }, <span className="text-[#98c379]">'Hello, world!'</span>)<span className="text-gray-400">;</span>`
-          }
-        ]
+        customComponent: "waterfallEditorial"
       }
     ]
   },
   {
     id: 2,
-    name: "How to merge an existing git repository into Turborepo",
-    subtitle: "November 26, 2024 • Monorepo Tooling",
-    category: "Git & Tooling",
-    description: "A guide on how to merge any existing app or library into Turborepo.",
-    metric: "4 min read",
+    name: "the asymmetry of loss",
+    subtitle: "Risk & Decisions",
+    category: "Mental Models",
+    description: "losing is not the negative of gaining; it pulls twice the weight. kahneman measured it, i live it at every delete key, if i am to tear down what i built, i wait for my finger to tremble.",
+    metric: "1 min read",
     status: "Published",
-    date: "November 26, 2024",
+    date: "",
     year: "2024",
     content: [
       {
-        heading: "Introduction",
         paragraphs: [
-          "When scaling projects in a monorepo, merging standalone git repositories while preserving full commit history can be tricky.",
-          "Here is the step-by-step guide to seamlessly merging existing codebases into Turborepo using git subtree and remote commands."
+          "losing is not the negative of gaining; it pulls twice the weight. kahneman measured it, i live it at every delete key, if i am to tear down what i built, i wait for my finger to tremble."
         ]
       },
       {
-        heading: "Step 1: Adding the Remote Repository",
-        paragraphs: [
-          "First, add your existing repository as a git remote:"
-        ],
-        codeBlocks: [
-          {
-            codeHtml: `<span className="text-[#61afef]">git</span> <span className="text-[#98c379]">remote add</span> <span className="text-[#e06c75]">existing-app</span> <span className="text-[#d19a66]">https://github.com/user/existing-app.git</span>`
-          }
-        ]
+        customComponent: "lossAversionChart"
+      },
+      {
+        customComponent: "lossWaterfallEditorial"
       }
     ]
   },
   {
     id: 3,
-    name: "Publishing a component library with Storybook, TypeScript, and Tailwind",
-    subtitle: "September 18, 2022 • Frontend Systems",
-    category: "Design Systems",
-    description: "A guide on how to publish your own custom React component library with Storybook, TypeScript, and Tailwind to NPM",
-    metric: "6 min read",
+    name: "the dichotomy of mind",
+    subtitle: "Mental Models",
+    category: "Mental Models",
+    description: "one mind, two lobes. both are me.",
+    metric: "1 min read",
     status: "Published",
-    date: "September 18, 2022",
+    date: "",
     year: "2022",
     content: [
       {
-        heading: "Overview",
         paragraphs: [
-          "Building a design system component library requires careful consideration for bundle size, TypeScript type exports, and Tailwind CSS isolation.",
-          "In this guide we look into setting up Storybook for interactive documentation and tsup for zero-config bundling."
+          "one mind, two lobes. both are me."
         ]
+      },
+      {
+        customComponent: "vennDiagramChart"
+      },
+      {
+        customComponent: "vennWaterfallEditorial"
       }
     ]
   },
   {
     id: 4,
-    name: "Why does React need keys?",
-    subtitle: "July 31, 2022 • React Concepts",
-    category: "React",
-    description: "This article will show you what is the purpose if the “key” prop in React and some best practices around it.",
-    metric: "3 min read",
+    name: "the observer's power",
+    subtitle: "Mental Models",
+    category: "Mental Models",
+    description: "the system holds all errors and all truths simultaneously until i observe it. reality is a heap of possibilities pruned by the attention of a rational observer. i don't write code; i force probabilities into a single rational output.",
+    metric: "1 min read",
     status: "Published",
-    date: "July 31, 2022",
+    date: "",
     year: "2022",
     content: [
       {
-        heading: "Understanding Identity in React",
         paragraphs: [
-          "Keys help React identify which items have changed, are added, or are removed. Keys should be given to the elements inside the array to give the elements a stable identity.",
-          "Without keys, React falls back to index-based comparison, causing subtle state bugs in dynamic lists."
+          "the system holds all errors and all truths simultaneously until i observe it. reality is a heap of possibilities pruned by the attention of a rational observer. i don't write code; i force probabilities into a single rational output."
         ]
+      },
+      {
+        customComponent: "observerEffectChart"
+      },
+      {
+        customComponent: "observerWaterfallEditorial"
       }
     ]
   },
   {
     id: 5,
-    name: "How to merge a git repository into Nx",
-    subtitle: "May 18, 2022 • Monorepos",
-    category: "Nx Monorepo",
-    description: "A guide on how to merge any existing app or library into a Nx monorepo.",
-    metric: "5 min read",
+    name: "the prisoner's dilema",
+    subtitle: "Game Theory",
+    category: "Game Theory",
+    description: "trust is not a feeling; it is a strategy. in a single hand, betrayal wins — but i don't play single hands with anyone. if we're sitting at the same table again, the math changes. my rule is simple: i trust first. i do what you do. i hold no grudge.",
+    metric: "1 min read",
     status: "Published",
-    date: "May 18, 2022",
+    date: "",
     year: "2022",
     content: [
       {
-        heading: "Integrating with Nx",
         paragraphs: [
-          "Nx workspace tools provide powerful monorepo generators. Learn how to import external projects without losing branch history."
+          "trust is not a feeling; it is a strategy. in a single hand, betrayal wins — but i don't play single hands with anyone. if we're sitting at the same table again, the math changes.",
+          "my rule is simple: i trust first. i do what you do. i hold no grudge."
         ]
+      },
+      {
+        customComponent: "trustGameChart"
+      },
+      {
+        customComponent: "trustWaterfallEditorial"
       }
     ]
   },
   {
     id: 6,
-    name: "JavaScript Promise and Async/Await",
-    subtitle: "April 20, 2022 • JavaScript",
-    category: "JavaScript",
-    description: "A short visual guide on what a Promise is in JavaScript, and how to avoid call back hell.",
-    metric: "4 min read",
+    name: "the entropy of mind",
+    subtitle: "2022 • Philosophy",
+    category: "Philosophy",
+    description: "order is not a state; it is an expense. it exists while you hold, and scatters when you go. behind every standing system, someone is paying the cost. i pay it gladly.",
+    metric: "1 min read",
     status: "Published",
-    date: "April 20, 2022",
+    date: "",
     year: "2022",
     content: [
       {
-        heading: "Promises Under the Event Loop",
         paragraphs: [
-          "Understanding microtasks vs macrotasks, asynchronous stack traces, and how async/await syntax unwraps promise execution."
+          "order is not a state; it is an expense. it exists while you hold, and scatters when you go. behind every standing system,",
+          "someone is paying the cost. i pay it gladly."
         ]
-      }
-    ]
-  },
-  {
-    id: 7,
-    name: "How to type the setState function from the useState hook",
-    subtitle: "April 14, 2022 • TypeScript",
-    category: "TypeScript",
-    metric: "2 min read",
-    status: "Published",
-    date: "April 14, 2022",
-    year: "2022",
-    content: [
+      },
       {
-        heading: "Typing React State Dispatchers",
-        paragraphs: [
-          "Use React.Dispatch<React.SetStateAction<T>> when passing state dispatch functions as component props in TypeScript."
-        ]
+        customComponent: "dotParticles"
+      },
+      {
+        customComponent: "entropyWaterfallEditorial"
       }
     ]
   }
@@ -212,6 +201,13 @@ export default function ThoughtsPage() {
   const handleSelectThought = (thought: ThoughtData) => {
     setHasOpenedArticle(true);
     setSelectedThought(thought);
+  };
+
+  const handleNextThought = () => {
+    if (!selectedThought) return;
+    const currentIndex = THOUGHTS.findIndex((t) => t.id === selectedThought.id);
+    const nextIndex = (currentIndex + 1) % THOUGHTS.length;
+    setSelectedThought(THOUGHTS[nextIndex]);
   };
 
   // Scroll to top when selecting an article
@@ -236,7 +232,7 @@ export default function ThoughtsPage() {
               {selectedThought ? (
                 /* Article Detailed View - Exact Match to Reference UI */
                 <motion.article
-                  key="article-detail"
+                  key={`article-detail-${selectedThought.id}`}
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -15 }}
@@ -302,9 +298,63 @@ export default function ThoughtsPage() {
                               />
                             </div>
                           ))}
+                        {block.customComponent === "paretoChart" && (
+                          <ParetoChart />
+                        )}
+                        {block.customComponent === "waterfallEditorial" && (
+                          <WaterfallEditorial />
+                        )}
+                        {block.customComponent === "lossAversionChart" && (
+                          <LossAversionChart />
+                        )}
+                        {block.customComponent === "lossWaterfallEditorial" && (
+                          <LossWaterfallEditorial />
+                        )}
+                        {block.customComponent === "vennDiagramChart" && (
+                          <VennDiagramChart />
+                        )}
+                        {block.customComponent === "vennWaterfallEditorial" && (
+                          <VennWaterfallEditorial />
+                        )}
+                        {block.customComponent === "observerEffectChart" && (
+                          <ObserverEffectChart />
+                        )}
+                        {block.customComponent === "observerWaterfallEditorial" && (
+                          <ObserverWaterfallEditorial />
+                        )}
+                        {block.customComponent === "trustGameChart" && (
+                          <TrustGameChart />
+                        )}
+                        {block.customComponent === "trustWaterfallEditorial" && (
+                          <TrustWaterfallEditorial />
+                        )}
+                        {block.customComponent === "dotParticles" && (
+                          <DotParticleCanvas />
+                        )}
+                        {block.customComponent === "entropyWaterfallEditorial" && (
+                          <EntropyWaterfallEditorial />
+                        )}
                       </div>
                     ))}
                   </div>
+
+                  {/* Bottom Navigation with Next Button (Hidden on Last Thought) */}
+                  {selectedThought && THOUGHTS.findIndex((t) => t.id === selectedThought.id) < THOUGHTS.length - 1 && (
+                    <div className="mt-14 pt-8 flex items-center gap-3">
+                      <div className="flex-1 h-[1px] bg-[#d9267c]" />
+                      <button
+                        onClick={handleNextThought}
+                        className="flex items-center gap-2 group cursor-pointer border-none bg-transparent p-0 outline-none"
+                      >
+                        <span className="text-[#d9267c] font-bold text-sm md:text-[15px]">
+                          Next
+                        </span>
+                        <span className="w-[22px] h-[22px] rounded-[4px] bg-[#d9267c] flex items-center justify-center text-white text-[12px] font-bold shadow-xs transition-transform group-hover:translate-x-1">
+                          →
+                        </span>
+                      </button>
+                    </div>
+                  )}
                 </motion.article>
               ) : (
                 /* Thoughts Hero & List View */

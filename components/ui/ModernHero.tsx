@@ -233,13 +233,6 @@ export const ModernHero: React.FC<ModernHeroProps> = ({
           >
             /thoughts
           </Link>
-          <Link
-            href="/stats"
-            onClick={(e) => handleNavClick(e, '/stats')}
-            className="hover:text-pink-500 transition-colors duration-200"
-          >
-            /stats
-          </Link>
         </div>
       </motion.div>
     </motion.div>

@@ -56,6 +56,14 @@
   z-index: 0;
 }
 
+.card-bg-image--inset {
+  inset: 12px;
+  border-radius: 14px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 .preview-card:hover .card-bg-image {
   transform: scale(1.04);
 }
@@ -128,7 +136,7 @@
   display: inline-flex;
   align-items: center;
   white-space: nowrap;
-  transition: color 0.3s ease;
+  transition: color 0.4s cubic-bezier(0.25, 1, 0.5, 1), transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), text-shadow 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .project-btn:hover .project-name {
@@ -138,11 +146,12 @@
 .project-btn.active .project-name {
   color: #ffffff;
   font-weight: 700;
-  text-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+  transform: translateX(4px);
+  text-shadow: 0 0 16px rgba(255, 255, 255, 0.2);
 }
 
 .active-indicator {
-  margin-left: 0.2rem;
+  margin-left: 0.25rem;
   color: #ffffff;
   display: inline-block;
   font-weight: 700;
@@ -193,17 +202,25 @@
 
   .preview-card-container {
     position: absolute;
-    top: 6%;
-    left: 5%;
+    top: 16%;
+    left: 50%;
+    transform: translateX(-50%);
     right: auto;
     bottom: auto;
     width: auto;
+    display: flex;
+    justify-content: center;
   }
 
   .preview-card {
-    width: min(280px, 64vw);
-    height: calc(min(280px, 64vw) * 0.625);
-    border-radius: 16px;
+    width: min(320px, 75vw);
+    height: calc(min(320px, 75vw) * 0.625);
+    border-radius: 18px;
+  }
+
+  .card-bg-image--inset {
+    inset: 8px;
+    border-radius: 10px;
   }
 
   .projects-list-container {
@@ -248,14 +265,15 @@
 /* Extra Small Screens (Compact Mobiles) */
 @media (max-width: 480px) {
   .preview-card-container {
-    top: 5%;
-    left: 5%;
+    top: 16%;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .preview-card {
-    width: min(220px, 58vw);
-    height: calc(min(220px, 58vw) * 0.625);
-    border-radius: 14px;
+    width: min(270px, 70vw);
+    height: calc(min(270px, 70vw) * 0.625);
+    border-radius: 16px;
   }
 
   .projects-list-container {

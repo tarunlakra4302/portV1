@@ -118,7 +118,7 @@ export default function AboutPage() {
             }}
             exit={{ opacity: 0, y: -20, scale: 0.95 }}
             transition={{ type: "spring", stiffness: 350, damping: 25 }}
-            className="fixed top-2 left-0 right-0 z-[100] flex justify-center pointer-events-none"
+            className="fixed top-14 sm:top-2 left-0 right-0 z-[100] flex justify-center pointer-events-none"
           >
             <DynamicIsland
               view={islandView}

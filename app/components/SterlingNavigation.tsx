@@ -107,18 +107,18 @@ const SterlingNavigation = React.forwardRef<
             <div
               className={`text-left md:text-right font-normal text-sm md:text-base max-w-2xl lg:max-w-3xl leading-relaxed transition-all duration-300 cursor-default group ${
                 isDarkRoute
-                  ? "text-neutral-400 hover:text-white"
-                  : "text-[#c2c2c2] hover:text-black"
+                  ? "text-white md:text-neutral-400 md:hover:text-white"
+                  : "text-black md:text-[#c2c2c2] md:hover:text-black"
               }`}
             >
               {pathname === "/thoughts" ? (
                 <>
                   If you ask the grass, the zebra is the monster, and the lion is the protector. Who is the villain depends on &ldquo;
                   <span
-                    className={`transition-all duration-300 ${
+                    className={`transition-all duration-300 font-semibold underline underline-offset-4 decoration-2 ${
                       isDarkRoute
-                        ? "group-hover:text-white group-hover:font-semibold group-hover:underline underline-offset-4 decoration-pink-500 decoration-2"
-                        : "group-hover:text-black group-hover:font-semibold group-hover:underline underline-offset-4 decoration-pink-500 decoration-2"
+                        ? "text-white decoration-pink-500 md:font-normal md:no-underline md:group-hover:text-white md:group-hover:font-semibold md:group-hover:underline"
+                        : "text-black decoration-pink-500 md:font-normal md:no-underline md:group-hover:text-black md:group-hover:font-semibold md:group-hover:underline"
                     }`}
                   >
                     who is telling the story
@@ -129,20 +129,20 @@ const SterlingNavigation = React.forwardRef<
                 <>
                   Focused on crafting products with{" "}
                   <span
-                    className={`italic transition-all duration-300 ${
+                    className={`italic transition-all duration-300 font-semibold ${
                       isDarkRoute
-                        ? "group-hover:text-white group-hover:font-semibold"
-                        : "group-hover:text-black group-hover:font-semibold"
+                        ? "text-white md:font-normal md:group-hover:text-white md:group-hover:font-semibold"
+                        : "text-black md:font-normal md:group-hover:text-black md:group-hover:font-semibold"
                     }`}
                   >
                     exceptional performance
                   </span>{" "}
                   and{" "}
                   <span
-                    className={`italic transition-all duration-300 ${
+                    className={`italic transition-all duration-300 font-semibold ${
                       isDarkRoute
-                        ? "group-hover:text-white group-hover:font-semibold"
-                        : "group-hover:text-black group-hover:font-semibold"
+                        ? "text-white md:font-normal md:group-hover:text-white md:group-hover:font-semibold"
+                        : "text-black md:font-normal md:group-hover:text-black md:group-hover:font-semibold"
                     }`}
                   >
                     polish
@@ -151,10 +151,10 @@ const SterlingNavigation = React.forwardRef<
                   <br />
                   Worst-case scenario, I&apos;ll make it; best-case scenario,{" "}
                   <span
-                    className={`transition-all duration-300 ${
+                    className={`transition-all duration-300 font-semibold underline underline-offset-4 decoration-2 ${
                       isDarkRoute
-                        ? "group-hover:text-white group-hover:font-semibold group-hover:underline underline-offset-4 decoration-yellow-400 decoration-2"
-                        : "group-hover:text-black group-hover:font-semibold group-hover:underline underline-offset-4 decoration-pink-500 decoration-2"
+                        ? "text-white decoration-yellow-400 md:font-normal md:no-underline md:group-hover:text-white md:group-hover:font-semibold md:group-hover:underline"
+                        : "text-black decoration-pink-500 md:font-normal md:no-underline md:group-hover:text-black md:group-hover:font-semibold md:group-hover:underline"
                     }`}
                   >
                     I&apos;ll make it big
@@ -165,10 +165,10 @@ const SterlingNavigation = React.forwardRef<
                 <>
                   My toxic trait is that I want to{" "}
                   <span
-                    className={`transition-all duration-300 ${
+                    className={`transition-all duration-300 font-semibold underline underline-offset-4 decoration-2 ${
                       isDarkRoute
-                        ? "group-hover:text-white group-hover:font-semibold group-hover:underline underline-offset-4 decoration-yellow-400 decoration-2"
-                        : "group-hover:text-black group-hover:font-semibold group-hover:underline underline-offset-4 decoration-pink-500 decoration-2"
+                        ? "text-white decoration-yellow-400 md:font-normal md:no-underline md:group-hover:text-white md:group-hover:font-semibold md:group-hover:underline"
+                        : "text-black decoration-pink-500 md:font-normal md:no-underline md:group-hover:text-black md:group-hover:font-semibold md:group-hover:underline"
                     }`}
                   >
                     create everything
@@ -179,10 +179,10 @@ const SterlingNavigation = React.forwardRef<
                 <>
                   My toxic trait is that I want to{" "}
                   <span
-                    className={`transition-all duration-300 ${
+                    className={`transition-all duration-300 font-semibold underline underline-offset-4 decoration-2 ${
                       isDarkRoute
-                        ? "group-hover:text-white group-hover:font-semibold group-hover:underline underline-offset-4 decoration-yellow-400 decoration-2"
-                        : "group-hover:text-black group-hover:font-semibold group-hover:underline underline-offset-4 decoration-pink-500 decoration-2"
+                        ? "text-white decoration-yellow-400 md:font-normal md:no-underline md:group-hover:text-white md:group-hover:font-semibold md:group-hover:underline"
+                        : "text-black decoration-pink-500 md:font-normal md:no-underline md:group-hover:text-black md:group-hover:font-semibold md:group-hover:underline"
                     }`}
                   >
                     create everything

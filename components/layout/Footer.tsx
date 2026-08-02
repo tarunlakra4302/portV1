@@ -46,11 +46,37 @@ export function Footer({
   }
 
   const containerRef = useRef<HTMLSpanElement>(null)
+  const [isExpandedMobile, setIsExpandedMobile] = React.useState(false)
 
   useGSAP(() => {
     if (!containerRef.current) return
     const hiddenChars = containerRef.current.querySelectorAll('.hidden-char')
     gsap.set(hiddenChars, { width: 0, opacity: 0 })
+
+    // Automatically expand when scrolling into view on small screens
+    if (window.innerWidth <= 768) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              gsap.to(hiddenChars, {
+                width: 'auto',
+                opacity: 1,
+                duration: 0.6,
+                ease: 'power3.out',
+                stagger: 0.05,
+                overwrite: 'auto'
+              })
+              setIsExpandedMobile(true)
+            }
+          })
+        },
+        { threshold: 0.2 }
+      )
+
+      observer.observe(containerRef.current)
+      return () => observer.disconnect()
+    }
   }, { scope: containerRef })
 
   const handleMouseEnter = () => {
@@ -80,6 +106,17 @@ export function Footer({
       },
       overwrite: 'auto'
     })
+  }
+
+  const handleMobileClick = () => {
+    if (!containerRef.current) return
+    if (!isExpandedMobile) {
+      handleMouseEnter()
+      setIsExpandedMobile(true)
+    } else {
+      handleMouseLeave()
+      setIsExpandedMobile(false)
+    }
   }
 
   return (
@@ -112,20 +149,20 @@ export function Footer({
               </li>
               <li>
                 <a 
-                  href="/projects" 
-                  onClick={(e) => handleNavClick(e, '/projects')}
-                  className="hover:text-white font-bold transition-colors duration-200"
-                >
-                  Case Studies
-                </a>
-              </li>
-              <li>
-                <a 
                   href="/about" 
                   onClick={(e) => handleNavClick(e, '/about')}
                   className="hover:text-white font-bold transition-colors duration-200"
                 >
                   About Me
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="/projects" 
+                  onClick={(e) => handleNavClick(e, '/projects')}
+                  className="hover:text-white font-bold transition-colors duration-200"
+                >
+                  Case Studies
                 </a>
               </li>
             </ul>
@@ -233,18 +270,18 @@ export function Footer({
             {/* Horizontal Line Divider - Made darker/more subtle using bg-white/10 */}
             <div className="w-full md:max-w-[240px] h-[1px] bg-white/10" />
             
-            {/* Bottom Block: Case Studies - Increased weight to font-bold */}
+            {/* Bottom Block: Thoughts - Increased weight to font-bold */}
             <a 
-              href="/projects" 
-              onClick={(e) => handleNavClick(e, '/projects')}
+              href="/thoughts" 
+              onClick={(e) => handleNavClick(e, '/thoughts')}
               className="group flex items-center justify-between md:justify-end gap-5 w-full md:max-w-[240px] text-left md:text-right"
             >
               <div className="flex flex-col">
                 <span className="text-white text-[15px] font-bold tracking-wide transition-colors duration-200">
-                  Case Studies
+                  Thoughts
                 </span>
                 <span className="text-[#6b7280] text-xs font-semibold mt-0.5">
-                  Explore Studies
+                  Explore Thoughts
                 </span>
               </div>
               {/* Arrow SVG points straight right (→) */}
@@ -264,6 +301,7 @@ export function Footer({
         <div 
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
+          onClick={handleMobileClick}
           className="w-full select-none overflow-hidden py-0 my-0 text-center flex items-center justify-center -mt-6 mb-8 cursor-pointer"
         >
           <span 
@@ -271,9 +309,9 @@ export function Footer({
             className="font-space-grotesk font-black text-[#fdfce9] inline-flex items-center justify-center leading-[0.7] tracking-tighter text-[8.5vw] sm:text-[9.2vw] md:text-[9.8vw] lg:text-[10vw] xl:text-[10.2vw] whitespace-nowrap lowercase"
           >
             <span>damn</span>
-            <span className="hidden-char overflow-hidden opacity-0 inline-block">{"\u00a0"}</span>
+            <span className="hidden-char overflow-hidden opacity-0 inline-block">&nbsp;</span>
             <span>it</span>
-            <span className="hidden-char overflow-hidden opacity-0 inline-block">,{"\u00a0"}</span>
+            <span className="hidden-char overflow-hidden opacity-0 inline-block">,&nbsp;</span>
             <span>tarun</span>
             <span className="hidden-char overflow-hidden opacity-0 inline-block">!!</span>
           </span>

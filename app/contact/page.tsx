@@ -590,14 +590,14 @@ export default function ContactPage() {
             {/* Input Name */}
             <div className="space-y-2">
               <label htmlFor="name" className="text-xs font-medium text-neutral-400">
-                Your Name
+                Name , Surname
               </label>
               <input
                 id="name"
                 name="name"
                 type="text"
                 required
-                placeholder="John Doe"
+                placeholder="Tarun Lakra"
                 value={name}
                 autoComplete="off"
                 onChange={(e) => setName(e.target.value)}
@@ -617,7 +617,7 @@ export default function ContactPage() {
                 name="email"
                 type="email"
                 required
-                placeholder="john@example.com"
+                placeholder="example@example.com"
                 value={email}
                 autoComplete="off"
                 onChange={(e) => setEmail(e.target.value)}
@@ -636,7 +636,7 @@ export default function ContactPage() {
                 id="phone"
                 name="number"
                 type="tel"
-                placeholder="+1 (555) 000-0000"
+                placeholder="+91 _ _ _ _ _ _ _ _ _ _"
                 value={phone}
                 autoComplete="off"
                 onChange={(e) => setPhone(e.target.value)}
@@ -656,7 +656,7 @@ export default function ContactPage() {
                 name="message"
                 required
                 rows={4}
-                placeholder="Tell me about your project..."
+                placeholder="describe whatever you want."
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 onFocus={() => setIsTyping(true)}

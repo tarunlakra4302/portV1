@@ -4,7 +4,8 @@ import nodemailer from 'nodemailer';
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, email, phone, message } = body;
+    const { name, surname, email, phone, message } = body;
+    const fullName = surname ? `${name} ${surname}`.trim() : name;
 
     // Basic validation
     if (!name || !email || !message) {
@@ -43,11 +44,11 @@ export async function POST(request: Request) {
 
     // Email options
     const mailOptions = {
-      from: `"${name}" <${smtpUser}>`,
+      from: `"${fullName}" <${smtpUser}>`,
       replyTo: email,
       to: targetEmail,
-      subject: `Portfolio Contact: ${name}`,
-      text: `You received a new message from your portfolio contact form.\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone || 'N/A'}\n\nMessage:\n${message}`,
+      subject: `Portfolio Contact: ${fullName}`,
+      text: `You received a new message from your portfolio contact form.\n\nName: ${fullName}\nEmail: ${email}\nPhone: ${phone || 'N/A'}\n\nMessage:\n${message}`,
       html: `
         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; background-color: #09090b; color: #f4f4f5; border-radius: 12px; border: 1px solid #27272a;">
           <h2 style="color: #ffffff; font-size: 20px; font-weight: 600; margin-bottom: 20px; border-bottom: 1px solid #27272a; padding-bottom: 12px;">
@@ -57,7 +58,7 @@ export async function POST(request: Request) {
           <table style="width: 100%; border-collapse: collapse; margin-bottom: 24px;">
             <tr>
               <td style="padding: 8px 0; color: #a1a1aa; font-size: 14px; width: 100px;"><strong>Name:</strong></td>
-              <td style="padding: 8px 0; color: #ffffff; font-size: 14px;">${name}</td>
+              <td style="padding: 8px 0; color: #ffffff; font-size: 14px;">${fullName}</td>
             </tr>
             <tr>
               <td style="padding: 8px 0; color: #a1a1aa; font-size: 14px;"><strong>Email:</strong></td>
