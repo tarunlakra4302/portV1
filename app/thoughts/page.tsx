@@ -218,7 +218,12 @@ export default function ThoughtsPage() {
   }, [selectedThought]);
 
   return (
-    <main className="w-full min-h-screen bg-white text-black font-sans selection:bg-[#FFDE00] selection:text-black antialiased relative">
+    <motion.main 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.25, ease: "easeOut" }}
+      className="w-full min-h-screen bg-white text-black font-sans selection:bg-[#FFDE00] selection:text-black antialiased relative"
+    >
       <SterlingNavigation />
 
       <div className="w-full max-w-[1400px] mx-auto px-6 md:px-12 pt-12 pb-24 relative z-50">
@@ -399,11 +404,11 @@ export default function ThoughtsPage() {
                     </div>
                   ) : (
                     <div className="flex flex-col text-3xl sm:text-5xl md:text-6xl lg:text-[4.5rem] font-black tracking-[-0.04em] leading-[0.85] select-none">
-                      <BlurReveal as="span" className="block text-[#c2c2c2]" delay={0.1}>
+                      <BlurReveal as="span" className="block text-[#c2c2c2]" delay={0.05}>
                         Welcome to my personal
                       </BlurReveal>
                       <div className="flex flex-wrap items-center gap-x-3 text-black">
-                        <BlurReveal as="span" delay={0.25}>
+                        <BlurReveal as="span" delay={0.1}>
                           thoughts
                         </BlurReveal>
                         <span className="relative inline-block z-50">
@@ -414,16 +419,16 @@ export default function ThoughtsPage() {
                               autoplay
                             />
                           </span>
-                          <BlurReveal as="span" delay={0.3}>
+                          <BlurReveal as="span" delay={0.12}>
                             —
                           </BlurReveal>
                         </span>
-                        <BlurReveal as="span" delay={0.35}>
+                        <BlurReveal as="span" delay={0.15}>
                           or, as I like to
                         </BlurReveal>
                       </div>
                       <div className="flex flex-wrap items-center text-[#c2c2c2] gap-x-3">
-                        <BlurReveal as="span" delay={0.4}>
+                        <BlurReveal as="span" delay={0.18}>
                           call them, my
                         </BlurReveal>
                         <SpiderVerseGlitchButton
@@ -433,7 +438,7 @@ export default function ThoughtsPage() {
                           reflections
                         </SpiderVerseGlitchButton>
                       </div>
-                      <BlurReveal as="span" className="block text-black" delay={0.55}>
+                      <BlurReveal as="span" className="block text-black" delay={0.22}>
                         on code & life.
                       </BlurReveal>
                     </div>
@@ -469,7 +474,7 @@ export default function ThoughtsPage() {
                         );
                       }
 
-                      const itemBaseDelay = 0.9 + index * 0.06;
+                      const itemBaseDelay = 0.15 + index * 0.03;
                       return (
                         <motion.div
                           key={thought.id}
@@ -537,7 +542,7 @@ export default function ThoughtsPage() {
         resumeUrl="https://drive.google.com/file/d/1uCC1Iam4_oSYYWcFfTqVhdws5F_l-222/view"
         className="relative z-10 bg-white border-t border-zinc-100 text-black py-16"
       />
-    </main>
+    </motion.main>
   );
 }
 
