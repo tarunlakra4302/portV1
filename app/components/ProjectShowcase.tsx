@@ -74,7 +74,6 @@ const PROJECTS: ProjectData[] = [
       "Utilizing web worker multi-threading and optimized WebGL canvases, Inertia renders complex user interaction heatmaps and conversion funnels with smooth 60fps performance directly in the client browser.",
       "Integrate Inertia into any application with a single-line script, and start tracking user behaviors, session replays, and custom event metrics with privacy-first data anonymization."
     ],
-    liveUrl: "https://github.com",
     codeUrl: "https://github.com/tarunlakra4302/Inertia-Equity-Risk-Intelligence-Platform",
     category: "Data Processing",
     description: "Visual reporting pipeline for deep user interaction and performance tracking.",
@@ -224,9 +223,9 @@ export default function ProjectShowcase() {
                     >
                       <span>Coming Soon</span>
                     </button>
-                  ) : (
+                  ) : activeProject.liveUrl ? (
                     <motion.a
-                      href={activeProject.liveUrl || "#"}
+                      href={activeProject.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="btn-primary"
@@ -245,7 +244,7 @@ export default function ProjectShowcase() {
                         <ArrowUpRight className="w-4 h-4" />
                       </motion.span>
                     </motion.a>
-                  )}
+                  ) : null}
  
                   {activeProject.codeUrl && (
                     <motion.a

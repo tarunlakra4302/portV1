@@ -268,7 +268,6 @@ const PROJECTS: ProjectData[] = [
       "The engine leverages Next.js 15 App Router architecture with Domain-Driven Design (DDD) principles to decouple core signal scoring and risk calculation models from web transport layers.",
       "By delegating multi-step AI summary generation and scheduled email deliveries to asynchronous Inngest background event queues, the platform keeps primary client action response times sub-100ms."
     ],
-    liveUrl: "https://github.com",
     codeUrl: "https://github.com/tarunlakra4302/Inertia-Equity-Risk-Intelligence-Platform",
     category: "Data Processing",
     description: "Institutional market data orchestration platform and risk engine.",

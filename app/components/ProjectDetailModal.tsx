@@ -128,9 +128,9 @@ export default function ProjectDetailModal({
                     >
                       <span>Coming Soon</span>
                     </button>
-                  ) : (
+                  ) : project.liveUrl ? (
                     <a
-                      href={project.liveUrl || "#"}
+                      href={project.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 bg-white text-black font-semibold text-sm px-6 py-3 rounded-full md:rounded-xl hover:bg-neutral-200 active:scale-95 transition-all shadow-lg hover:shadow-white/5"
@@ -151,7 +151,7 @@ export default function ProjectDetailModal({
                         <polyline points="7 7 17 7 17 17" />
                       </svg>
                     </a>
-                  )}
+                  ) : null}
 
                   {/* Button 2: See Source Code */}
                   <a
