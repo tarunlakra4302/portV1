@@ -24,7 +24,7 @@ const PROJECTS: ProjectData[] = [
       "Engineered with a Next.js App Router architecture featuring Razorpay payment integration, Upstash Redis distributed rate limiting, and strict UUID v4 idempotency validation.",
       "The platform eliminates payment duplicate risk, secures public forms against automated spam, and delivers a responsive 60fps WebGL-enhanced user interface."
     ],
-    liveUrl: "https://github.com/tarunlakra4302",
+    liveUrl: "coming-soon",
     category: "Community Impact & Climate Tech",
     description: "Community impact & donation platform managing zero-waste programs and automated payments.",
     metric: "0% Duplicate Risk",
@@ -217,26 +217,35 @@ export default function ProjectShowcase() {
                   className="detail-actions" 
                   onClick={(e) => e.stopPropagation()}
                 >
-                  <motion.a
-                    href={activeProject.liveUrl || "#"}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-primary"
-                    whileHover="hover"
-                    whileTap={{ scale: 0.96 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 15 }}
-                  >
-                    <span>Live Preview</span>
-                    <motion.span
-                      variants={{
-                        hover: { x: 2, y: -2 }
-                      }}
-                      transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                      className="inline-flex"
+                  {activeProject.name === "Sustainable Sundays" || activeProject.liveUrl === "coming-soon" ? (
+                    <button
+                      disabled
+                      className="btn-primary opacity-70 cursor-not-allowed bg-zinc-200 text-zinc-600 hover:scale-100"
                     >
-                      <ArrowUpRight className="w-4 h-4" />
-                    </motion.span>
-                  </motion.a>
+                      <span>Coming Soon</span>
+                    </button>
+                  ) : (
+                    <motion.a
+                      href={activeProject.liveUrl || "#"}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-primary"
+                      whileHover="hover"
+                      whileTap={{ scale: 0.96 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 15 }}
+                    >
+                      <span>Live Preview</span>
+                      <motion.span
+                        variants={{
+                          hover: { x: 2, y: -2 }
+                        }}
+                        transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                        className="inline-flex"
+                      >
+                        <ArrowUpRight className="w-4 h-4" />
+                      </motion.span>
+                    </motion.a>
+                  )}
  
                   {activeProject.codeUrl && (
                     <motion.a

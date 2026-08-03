@@ -41,13 +41,13 @@ export default function CallToAction() {
         Ok, you&apos;ve scrolled this far, you must be<br className="hidden md:block" /> looking to do something now right?
       </h2>
       
-      <div className="flex flex-row flex-nowrap justify-center items-center gap-1.5 xs:gap-2 sm:gap-4 md:gap-6 w-full max-w-full px-1 sm:px-4">
+      <div className="flex flex-row flex-wrap items-center justify-center gap-2.5 sm:gap-4 md:gap-6 w-full max-w-full px-3 sm:px-4">
         {/* Button 1: Email me */}
-        <div className="h-[40px] sm:h-[46px] w-auto sm:w-[140px] flex-shrink-0">
+        <div className="h-[42px] sm:h-[46px] w-auto sm:w-[140px] flex-shrink-0">
           <LiquidGlassViewport bgImage="" fallbackMode="blur" className="w-full h-full rounded-full bg-transparent overflow-visible">
             <LiquidGlassButton 
               onClick={handleCopyEmail}
-              className="w-full h-full text-neutral-800 hover:text-black font-semibold text-[11px] xs:text-xs sm:text-sm py-0 px-2.5 sm:px-4 rounded-full flex items-center justify-center gap-1 sm:gap-1.5 whitespace-nowrap transition-all duration-300 hover:scale-[1.03] active:scale-[0.97]"
+              className="w-full h-full text-neutral-800 hover:text-black font-semibold text-xs sm:text-sm py-0 px-3.5 sm:px-4 rounded-full flex items-center justify-center gap-1.5 whitespace-nowrap transition-all duration-300 hover:scale-[1.03] active:scale-[0.97]"
             >
               <span>{copied ? "Copied!" : "Email me"}</span>
               {copied ? (
@@ -60,7 +60,7 @@ export default function CallToAction() {
         </div>
 
         {/* Button 2: Connect with me */}
-        <div className="h-[40px] sm:h-[46px] w-auto sm:w-[190px] flex-shrink-0">
+        <div className="h-[42px] sm:h-[46px] w-auto sm:w-[190px] flex-shrink-0">
           <a
             href="https://www.linkedin.com/in/tarun-lakra/"
             target="_blank"
@@ -68,7 +68,7 @@ export default function CallToAction() {
             className="block w-full h-full"
           >
             <LiquidGlassViewport bgImage="" fallbackMode="blur" className="w-full h-full rounded-full bg-transparent overflow-visible">
-              <LiquidGlassButton className="w-full h-full text-neutral-800 hover:text-black font-semibold text-[11px] xs:text-xs sm:text-sm py-0 px-2.5 sm:px-4 rounded-full flex items-center justify-center gap-1 sm:gap-1.5 whitespace-nowrap transition-all duration-300 hover:scale-[1.03] active:scale-[0.97]">
+              <LiquidGlassButton className="w-full h-full text-neutral-800 hover:text-black font-semibold text-xs sm:text-sm py-0 px-3.5 sm:px-4 rounded-full flex items-center justify-center gap-1.5 whitespace-nowrap transition-all duration-300 hover:scale-[1.03] active:scale-[0.97]">
                 <LinkedinIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
                 <span>Connect with me</span>
               </LiquidGlassButton>
@@ -77,7 +77,7 @@ export default function CallToAction() {
         </div>
 
         {/* Button 3: Download resume */}
-        <div className="h-[40px] sm:h-[46px] w-auto sm:w-[190px] flex-shrink-0">
+        <div className="h-[42px] sm:h-[46px] w-auto sm:w-[190px] flex-shrink-0">
           <a
             href="https://drive.google.com/file/d/1uCC1Iam4_oSYYWcFfTqVhdws5F_l-222/view"
             target="_blank"
@@ -85,7 +85,7 @@ export default function CallToAction() {
             className="block w-full h-full"
           >
             <LiquidGlassViewport bgImage="" fallbackMode="blur" className="w-full h-full rounded-full bg-transparent overflow-visible">
-              <LiquidGlassButton className="w-full h-full text-neutral-800 hover:text-black font-semibold text-[11px] xs:text-xs sm:text-sm py-0 px-2.5 sm:px-4 rounded-full flex items-center justify-center gap-1 sm:gap-1.5 whitespace-nowrap transition-all duration-300 hover:scale-[1.03] active:scale-[0.97]">
+              <LiquidGlassButton className="w-full h-full text-neutral-800 hover:text-black font-semibold text-xs sm:text-sm py-0 px-3.5 sm:px-4 rounded-full flex items-center justify-center gap-1.5 whitespace-nowrap transition-all duration-300 hover:scale-[1.03] active:scale-[0.97]">
                 <span>Download resume</span>
                 <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" strokeWidth={1.5} />
               </LiquidGlassButton>

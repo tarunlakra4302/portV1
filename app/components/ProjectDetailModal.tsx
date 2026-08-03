@@ -120,29 +120,38 @@ export default function ProjectDetailModal({
 
                 {/* 5. Action Buttons */}
                 <div className="mt-8 flex flex-wrap gap-4 items-center justify-start">
-                  {/* Button 1: Live Preview */}
-                  <a
-                    href={project.liveUrl || "#"}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 bg-white text-black font-semibold text-sm px-6 py-3 rounded-full md:rounded-xl hover:bg-neutral-200 active:scale-95 transition-all shadow-lg hover:shadow-white/5"
-                  >
-                    <span>Live Preview</span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
+                  {/* Button 1: Live Preview / Coming Soon */}
+                  {project.name === "Sustainable Sundays" || project.liveUrl === "coming-soon" ? (
+                    <button
+                      disabled
+                      className="inline-flex items-center gap-2 bg-neutral-800 text-neutral-400 font-semibold text-sm px-6 py-3 rounded-full md:rounded-xl cursor-not-allowed border border-neutral-700"
                     >
-                      <line x1="7" y1="17" x2="17" y2="7" />
-                      <polyline points="7 7 17 7 17 17" />
-                    </svg>
-                  </a>
+                      <span>Coming Soon</span>
+                    </button>
+                  ) : (
+                    <a
+                      href={project.liveUrl || "#"}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 bg-white text-black font-semibold text-sm px-6 py-3 rounded-full md:rounded-xl hover:bg-neutral-200 active:scale-95 transition-all shadow-lg hover:shadow-white/5"
+                    >
+                      <span>Live Preview</span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <line x1="7" y1="17" x2="17" y2="7" />
+                        <polyline points="7 7 17 7 17 17" />
+                      </svg>
+                    </a>
+                  )}
 
                   {/* Button 2: See Source Code */}
                   <a

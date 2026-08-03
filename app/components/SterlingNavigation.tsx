@@ -6,27 +6,30 @@ import Link from "next/link";
 import { usePageNavigate } from "@/lib/view-transition";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
+const getKolkataTime = () => {
+  return new Date().toLocaleTimeString("en-US", {
+    timeZone: "Asia/Kolkata",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  });
+};
+
 const SterlingNavigation = React.forwardRef<
   HTMLDivElement,
   { style?: React.CSSProperties; isCompleted?: boolean }
 >(({ style, isCompleted = true }, ref) => {
   const pathname = usePathname();
   const navigateWithTransition = usePageNavigate();
-  const [currentTime, setCurrentTime] = useState("13:29");
+  const [currentTime, setCurrentTime] = useState(getKolkataTime);
 
   // Dynamic Kolkata local time clock
   useEffect(() => {
     const updateTime = () => {
-      const options: Intl.DateTimeFormatOptions = {
-        timeZone: "Asia/Kolkata",
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: false,
-      };
-      setCurrentTime(new Date().toLocaleTimeString("en-US", options));
+      setCurrentTime(getKolkataTime());
     };
     updateTime();
-    const interval = setInterval(updateTime, 60000);
+    const interval = setInterval(updateTime, 10000);
     return () => clearInterval(interval);
   }, []);
 
