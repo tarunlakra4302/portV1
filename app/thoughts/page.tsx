@@ -485,7 +485,7 @@ export default function ThoughtsPage() {
         location="New Delhi, India"
         linkedinUrl="https://www.linkedin.com/in/tarun-lakra/"
         githubUrl="https://github.com/tarunlakra4302"
-        resumeUrl="https://drive.google.com/file/d/1uCC1Iam4_oSYYWcFfTqVhdws5F_l-222/view"
+        resumeUrl="https://drive.google.com/file/d/1hZEg2OOxralKmsUK_2fWJ3sVvWwob4PN/view?usp=sharing"
         className="relative z-10 bg-white border-t border-zinc-100 text-black py-16"
       />
     </main>

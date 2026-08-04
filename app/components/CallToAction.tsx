@@ -79,7 +79,7 @@ export default function CallToAction() {
         {/* Button 3: Download resume */}
         <div className="h-[42px] sm:h-[46px] w-auto sm:w-[190px] flex-shrink-0">
           <a
-            href="https://drive.google.com/file/d/1uCC1Iam4_oSYYWcFfTqVhdws5F_l-222/view"
+            href="https://drive.google.com/file/d/1hZEg2OOxralKmsUK_2fWJ3sVvWwob4PN/view?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
             className="block w-full h-full"
