@@ -17,6 +17,7 @@ export interface BlurRevealProps {
   inView?: boolean;
   once?: boolean;
   letterSpacing?: string | number;
+  splitBy?: "character" | "word";
 }
 
 export function BlurReveal({
@@ -33,6 +34,7 @@ export function BlurReveal({
   inView = false,
   once = true,
   letterSpacing,
+  splitBy = "character",
 }: BlurRevealProps) {
   const MotionTag = motion[as as keyof typeof motion] as typeof motion.div;
 
@@ -57,16 +59,17 @@ export function BlurReveal({
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, filter: "blur(12px)", y: 10 },
+    hidden: { opacity: 0, filter: "blur(12px)", y: 10, willChange: "auto" },
     visible: {
       opacity: 1,
       filter: "blur(0px)",
       y: 0,
+      willChange: "auto",
       transition: {
         duration: baseDuration,
       },
     },
-    exit: { opacity: 0, filter: "blur(12px)", y: 10 },
+    exit: { opacity: 0, filter: "blur(12px)", y: 10, willChange: "auto" },
   };
 
   return (
@@ -86,35 +89,65 @@ export function BlurReveal({
         >
           <span className="sr-only">{children}</span>
           {children &&
-            children.split(" ").map((word, wordIndex, wordsArray) => (
-              <span
-                key={`word-${wordIndex}`}
-                className="inline-block whitespace-nowrap"
-                aria-hidden="true"
-              >
-                {word.split("").map((char, charIndex) => (
-                  <motion.span
-                    key={`char-${wordIndex}-${charIndex}`}
-                    variants={itemVariants}
-                    className="inline-block"
-                    style={
-                      letterSpacing ? { marginRight: letterSpacing } : undefined
-                    }
+            children.split(" ").map((word, wordIndex, wordsArray) => {
+              if (splitBy === "word") {
+                return (
+                  <span
+                    key={`word-wrapper-${wordIndex}`}
+                    className="inline-block whitespace-nowrap"
+                    aria-hidden="true"
                   >
-                    {char}
-                  </motion.span>
-                ))}
-                {wordIndex < wordsArray.length - 1 && (
-                  <motion.span
-                    key={`space-${wordIndex}`}
-                    variants={itemVariants}
-                    className="inline-block"
-                  >
-                    &nbsp;
-                  </motion.span>
-                )}
-              </span>
-            ))}
+                    <motion.span
+                      variants={itemVariants}
+                      className="inline-block"
+                      style={
+                        letterSpacing ? { marginRight: letterSpacing } : undefined
+                      }
+                    >
+                      {word}
+                    </motion.span>
+                    {wordIndex < wordsArray.length - 1 && (
+                      <motion.span
+                        variants={itemVariants}
+                        className="inline-block"
+                      >
+                        &nbsp;
+                      </motion.span>
+                    )}
+                  </span>
+                );
+              }
+
+              return (
+                <span
+                  key={`word-${wordIndex}`}
+                  className="inline-block whitespace-nowrap"
+                  aria-hidden="true"
+                >
+                  {word.split("").map((char, charIndex) => (
+                    <motion.span
+                      key={`char-${wordIndex}-${charIndex}`}
+                      variants={itemVariants}
+                      className="inline-block"
+                      style={
+                        letterSpacing ? { marginRight: letterSpacing } : undefined
+                      }
+                    >
+                      {char}
+                    </motion.span>
+                  ))}
+                  {wordIndex < wordsArray.length - 1 && (
+                    <motion.span
+                      key={`space-${wordIndex}`}
+                      variants={itemVariants}
+                      className="inline-block"
+                    >
+                      &nbsp;
+                    </motion.span>
+                  )}
+                </span>
+              );
+            })}
         </MotionTag>
       )}
     </AnimatePresence>

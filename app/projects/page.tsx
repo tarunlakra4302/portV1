@@ -689,30 +689,36 @@ export default function ProjectsPage() {
                   className="flex flex-col"
                 >
                   {/* Massive Hero Typography */}
+                  {/* Massive Hero Typography */}
                   <div className="flex flex-col text-3xl sm:text-5xl md:text-6xl lg:text-[4.5rem] font-black tracking-[-0.04em] leading-[0.85] select-none">
-                    <BlurReveal as="span" className="block text-[#c2c2c2]" delay={0.1}>
+                    <BlurReveal as="span" className="block text-[#c2c2c2]" delay={0.05}>
                       Welcome to my personal
                     </BlurReveal>
-                    <BlurReveal as="span" className="block text-black" delay={0.25}>
-                      crafts — or, as I like to
-                    </BlurReveal>
-                    <div className="flex flex-wrap items-center text-[#c2c2c2] gap-x-3">
-                      <BlurReveal as="span" delay={0.4}>
-                        call them,
+                    <div className="flex flex-wrap items-center gap-x-3 text-black">
+                      <BlurReveal as="span" delay={0.1}>
+                        crafts
                       </BlurReveal>
-                      <div className="inline-flex items-center gap-x-3">
-                        <BlurReveal as="span" delay={0.45}>
-                          my
+                      <span className="relative inline-block z-50">
+                        <BlurReveal as="span" delay={0.12}>
+                          —
                         </BlurReveal>
-                        <SpiderVerseGlitchButton
-                          text="playground"
-                          className="relative inline-block text-black bg-[#FFDE00] px-3.5 py-1 rounded-sm transform -rotate-1 -skew-x-2 shadow-sm font-black"
-                        >
-                          playground
-                        </SpiderVerseGlitchButton>
-                      </div>
+                      </span>
+                      <BlurReveal as="span" delay={0.15}>
+                        or, as I like to
+                      </BlurReveal>
                     </div>
-                    <BlurReveal as="span" className="block text-black" delay={0.55}>
+                    <div className="flex flex-wrap items-center text-[#c2c2c2] gap-x-3">
+                      <BlurReveal as="span" delay={0.18}>
+                        call them, my
+                      </BlurReveal>
+                      <SpiderVerseGlitchButton
+                        text="playground"
+                        className="relative inline-block text-black bg-[#FFDE00] px-3.5 py-1 rounded-sm transform -rotate-1 -skew-x-2 shadow-sm font-black"
+                      >
+                        playground
+                      </SpiderVerseGlitchButton>
+                    </div>
+                    <BlurReveal as="span" className="block text-black" delay={0.22}>
                       on the web.
                     </BlurReveal>
                   </div>
@@ -725,10 +731,13 @@ export default function ProjectsPage() {
 
                     {/* Elegant List of Case Studies */}
                     <div className="flex flex-col border-t border-zinc-100">
-                      {PROJECTS.map((project) => (
-                        <div
+                      {PROJECTS.map((project, index) => (
+                        <motion.div
                           key={project.id}
                           onClick={() => handleSelectProject(project)}
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: index * 0.04, duration: 0.25, ease: "easeOut" }}
                           className="group flex items-center justify-between py-4 md:py-5 border-b border-zinc-100 cursor-pointer transition-all duration-300 hover:px-2 gap-4"
                         >
                           <div className="flex flex-col gap-1 min-w-0 flex-1">
@@ -752,7 +761,7 @@ export default function ProjectsPage() {
                               <ArrowUpRight className="w-3.5 h-3.5" />
                             </div>
                           </div>
-                        </div>
+                        </motion.div>
                       ))}
                     </div>
                   </div>
