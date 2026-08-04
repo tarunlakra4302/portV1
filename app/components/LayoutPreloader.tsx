@@ -1,15 +1,17 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import dynamic from "next/dynamic";
 import HeroSection3 from "./HeroSection3";
-import ParallaxVelocityText from "./ParallaxVelocityText";
-import ProjectShowcase from "./ProjectShowcase";
-import CodeAiWorkflowsSection from "./CodeAiWorkflowsSection";
-import TechStack from "./TechStack";
-import CallToAction from "./CallToAction";
 import SterlingNavigation from "./SterlingNavigation";
 import Preloader from "@/components/ui/preloader";
-import { Footer } from "@/components/layout/Footer";
+
+const ParallaxVelocityText = dynamic(() => import("./ParallaxVelocityText"));
+const ProjectShowcase = dynamic(() => import("./ProjectShowcase"));
+const CodeAiWorkflowsSection = dynamic(() => import("./CodeAiWorkflowsSection"));
+const TechStack = dynamic(() => import("./TechStack"));
+const CallToAction = dynamic(() => import("./CallToAction"));
+const Footer = dynamic(() => import("@/components/layout/Footer").then((mod) => mod.Footer));
 
 let hasSiteLoaded = false;
 
