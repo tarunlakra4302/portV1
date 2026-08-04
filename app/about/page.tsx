@@ -59,7 +59,6 @@ const accordionContentVariants = {
 
 export default function AboutPage() {
   const [isBackgroundOpen, setIsBackgroundOpen] = useState(false)
-  const [isDesignPhilosophyOpen, setIsDesignPhilosophyOpen] = useState(false)
   const [isThingsILoveOpen, setIsThingsILoveOpen] = useState(false)
 
   const { data: nowPlaying } = useNowPlaying(5000)
@@ -206,60 +205,8 @@ export default function AboutPage() {
           </AnimatePresence>
         </motion.section>
 
-        {/* DESIGN PHILOSOPHY SECTION */}
-        <motion.section variants={itemRevealVariants} className="mb-12 sm:mb-16 md:mb-20">
-          <div className="flex items-center justify-between mb-4 sm:mb-6">
-            <h3 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-[#1A1A1A]">
-              Design Philosophy
-            </h3>
-            <button
-              onClick={() => setIsDesignPhilosophyOpen(!isDesignPhilosophyOpen)}
-              className="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-black text-white rounded-full hover:bg-gray-800 transition-all duration-300 group flex-shrink-0"
-            >
-              {isDesignPhilosophyOpen ? (
-                <X className="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:rotate-90" />
-              ) : (
-                <Plus className="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:rotate-90" />
-              )}
-            </button>
-          </div>
-
-          <AnimatePresence mode="wait">
-            {isDesignPhilosophyOpen && (
-              <motion.div
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                variants={accordionContentVariants}
-                style={{ overflow: 'hidden' }}
-              >
-                <div className="space-y-6 sm:space-y-8 pt-2">
-                  <motion.p variants={itemRevealVariants} className="text-base sm:text-lg md:text-xl text-gray-700 leading-[1.7] sm:leading-[1.8]">
-                    My background has shaped my design philosophy to prioritize minimizing cognitive load for users.
-                    In a world where people juggle countless products daily, the last thing I want is to create yet
-                    another hurdle. Instead, I strive to craft experiences that invite users in, encouraging them to
-                    explore deeper without feeling lost at the front door.
-                  </motion.p>
-                  <motion.p variants={itemRevealVariants} className="text-base sm:text-lg md:text-xl text-gray-700 leading-[1.7] sm:leading-[1.8]">
-                    One thing I really love about design is how small details can subtly shape people&apos;s experiences.
-                    It&apos;s not merely about aesthetics; it&apos;s about hitting that sweet spot where everything feels just right.
-                    This is why I find joy in crafting playful micro-animations, fine-tuning the perfect spring animation,
-                    and humanizing interactions to reflect genuine human intentions. Think about it—it&apos;s often the little
-                    things that make your day!
-                  </motion.p>
-                  <motion.p variants={itemRevealVariants} className="text-base sm:text-lg md:text-xl text-gray-700 leading-[1.7] sm:leading-[1.8]">
-                    At the heart of my work is empathy. Keeping in mind that there&apos;s a complex, unique individual on the
-                    other side of the screen inspires me to adopt a multi-layered approach to design. My goal is to craft
-                    products that make people feel fulfilled and seamlessly weave into their daily lives.
-                  </motion.p>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </motion.section>
-
         {/* THINGS I LOVE SECTION */}
-        <motion.section variants={itemRevealVariants} className="mb-12 sm:mb-16 md:mb-20">
+        <motion.section variants={itemRevealVariants} className="mb-2 sm:mb-3 md:mb-4">
           <div className="flex items-center justify-between mb-4 sm:mb-6">
             <h3 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-[#1A1A1A]">
               Things I Love

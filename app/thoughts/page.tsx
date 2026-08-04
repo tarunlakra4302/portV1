@@ -442,7 +442,7 @@ export default function ThoughtsPage() {
                   )}
 
                   {/* Thoughts List Section */}
-                  <div className="mt-16 md:mt-24 flex flex-col divide-y divide-gray-200/80 border-t border-b border-gray-200/80">
+                  <div className="mt-16 md:mt-24 flex flex-col">
                     {THOUGHTS.map((thought, index) => {
                       return (
                         <motion.div

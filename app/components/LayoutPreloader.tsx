@@ -4,6 +4,8 @@ import React, { useEffect, useRef, useState } from "react";
 import HeroSection3 from "./HeroSection3";
 import ParallaxVelocityText from "./ParallaxVelocityText";
 import ProjectShowcase from "./ProjectShowcase";
+import CodeAiWorkflowsSection from "./CodeAiWorkflowsSection";
+import TechStack from "./TechStack";
 import CallToAction from "./CallToAction";
 import SterlingNavigation from "./SterlingNavigation";
 import Preloader from "@/components/ui/preloader";
@@ -53,6 +55,8 @@ export default function LayoutPreloader() {
         <div className="relative z-30 w-full flex flex-col">
           <ParallaxVelocityText />
           <ProjectShowcase />
+          <CodeAiWorkflowsSection />
+          <TechStack />
           <CallToAction />
           <Footer
             email="lakra.tarun4302@gmail.com"

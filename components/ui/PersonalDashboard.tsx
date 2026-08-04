@@ -109,7 +109,7 @@ export function PersonalDashboard() {
   }, [])
 
   return (
-    <div className="w-full bg-white py-6 sm:py-8 md:py-10 px-4 sm:px-6 md:px-8 lg:px-12 relative overflow-hidden">
+    <div className="w-full bg-white pt-0 pb-6 sm:pb-8 md:pb-10 px-4 sm:px-6 md:px-8 lg:px-12 relative overflow-hidden">
       {/* Dotted Surface Effect */}
       <div className="absolute inset-0 pointer-events-none">
         <DottedSurface className="w-full h-full opacity-60" />

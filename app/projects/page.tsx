@@ -637,15 +637,24 @@ export default function ProjectsPage() {
                   {/* Action Links */}
                   <div className="flex flex-wrap items-center gap-4 pt-4 border-t border-zinc-100">
                     {selectedProject.liveUrl && (
-                      <a
-                        href={selectedProject.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-md bg-[#111111] text-white text-sm font-semibold hover:bg-black transition-colors"
-                      >
-                        Live Demo
-                        <ArrowUpRight className="w-4 h-4" />
-                      </a>
+                      selectedProject.name === "Sustainable Sundays" || selectedProject.liveUrl === "coming-soon" ? (
+                        <button
+                          disabled
+                          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-md bg-zinc-200 text-zinc-600 text-sm font-semibold opacity-70 cursor-not-allowed"
+                        >
+                          Coming Soon
+                        </button>
+                      ) : (
+                        <a
+                          href={selectedProject.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-md bg-[#111111] text-white text-sm font-semibold hover:bg-black transition-colors"
+                        >
+                          Live Demo
+                          <ArrowUpRight className="w-4 h-4" />
+                        </a>
+                      )
                     )}
                     {selectedProject.codeUrl && (
                       <a

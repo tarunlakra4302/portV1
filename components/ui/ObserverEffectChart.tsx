@@ -67,8 +67,16 @@ export default function ObserverEffectChart() {
   });
 
   const handleObserveStart = () => {
-    setActiveObservedIndex(0);
-    activeObservedRef.current = 0;
+    setActiveObservedIndex((prev) => {
+      let nextIndex = Math.floor(Math.random() * PARTICLES.length);
+      if (prev !== null && PARTICLES.length > 1) {
+        while (nextIndex === prev) {
+          nextIndex = Math.floor(Math.random() * PARTICLES.length);
+        }
+      }
+      activeObservedRef.current = nextIndex;
+      return nextIndex;
+    });
   };
 
   const handleObserveEnd = () => {
